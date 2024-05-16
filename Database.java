@@ -1,40 +1,48 @@
-
-
+import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-public class Database extends GOOEY {
 
-    public static void loadResults() {
-        try {
-            String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
-            String username = "root";
-            String password = "";
+public class Database {
+    static String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
+    static String username = "HMI";  //Was root
+    static String password = "HMItest"; //Was leeg
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            Connection connection = DriverManager.getConnection(url, username, password);
-
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
-
-
-            StringBuilder resultText = new StringBuilder("<html><body>");
-            resultText.append("Orderlijst").append("<br>");
-            while (resultSet.next()) {
-                int LastOrderID = resultSet.getInt(1);
-                int LastcustomerID = resultSet.getInt(2);
-                resultText.append("Order ID: ").append(LastOrderID).append(", Customer ID: ").append(LastcustomerID).append("<br>");
-
-            }
-
-            resultText.append("</body></html>");
-            resultLabel.setText(resultText.toString());
-
-            connection.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            resultLabel.setText("Error: " + ex.getMessage());
+    public static void executeChangeQuery(String query) {
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             Statement statement = connection.createStatement()) {
+            // Execute the update query
+            int rowsAffected = statement.executeUpdate(query);
+            System.out.println(rowsAffected + " row(s) affected.");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
+    public static DefaultTableModel executeQuery(String query) throws SQLException {
+        Connection connection = DriverManager.getConnection(url, username, password);
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        DefaultTableModel model = new DefaultTableModel();
+
+
+        for (int i = 1; i <= columnCount; i++) {
+            model.addColumn(metaData.getColumnName(i));
+        }
+
+
+        while (resultSet.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                row[i - 1] = resultSet.getObject(i);
+            }
+            model.addRow(row);
+        }
+
+        resultSet.close();
+        statement.close();
+        connection.close();
+        return model;
+    }
 }
