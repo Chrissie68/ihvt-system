@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
+import com.fazecast.jSerialComm.*;
 
 public class GOOEY extends JFrame implements ActionListener {
 
@@ -11,6 +12,7 @@ public class GOOEY extends JFrame implements ActionListener {
     static JLabel resultLabel;
     JButton OrderDialogButton;
     JTable orderShow;
+    SerialPort Arduino;
 
     public GOOEY() {
         //Basic stuff
@@ -78,13 +80,27 @@ public class GOOEY extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ControlPanelButton) {
-            ControlPanel controlPanel = new ControlPanel(this, true);
+            Arduino = SerialPort.getCommPort("COM8");
+            Arduino.setComPortParameters(9600, 8, 1, 0);
+
+            if (Arduino.openPort()) {
+                System.out.println("poort open");
+            } else {
+                System.out.println("kan poort niet openen");
+                return;
+            }
+
+            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
+            ControlPanel controlPanel = new ControlPanel(this, true, Arduino);
+            Arduino.closePort();
+
         }
         if (e.getSource() == OrderDialogButton){
             try{
                 int row = orderShow.getSelectedRow();
                 System.out.println(orderShow.getValueAt(row, 0));
-                OrderDialog orderDialog = new OrderDialog(this, true, orderShow.getValueAt(row, 0));
+                Object orderNumber = orderShow.getValueAt(row, 0);
+                OrderDialog orderDialog = new OrderDialog(this, true, orderNumber);
             }
             catch(ArrayIndexOutOfBoundsException exception){
                 System.out.println("Het probleem is opgelost");

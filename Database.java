@@ -1,11 +1,12 @@
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
+
 public class Database {
-    static String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
+    static String url = "jdbc:mysql://localhost:3306/nerdygadgets";
     static String username = "HMI";  //Was root
     static String password = "HMItest"; //Was leeg
-
+//Class.forName("com.mysql.cj.jdbc.Driver");
     public static void executeChangeQuery(String query) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement()) {
