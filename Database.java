@@ -17,7 +17,7 @@ public class Database {
         }
     }
 
-    public static DefaultTableModel executeQuery(String query) throws SQLException {
+    public static DefaultTableModel executeSelectQuery(String query) throws SQLException {
         Connection connection = DriverManager.getConnection(url, username, password);
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);

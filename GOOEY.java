@@ -1,9 +1,6 @@
 
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
-
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,7 +52,7 @@ public class GOOEY extends JFrame implements ActionListener {
 //        resultLabel = new JLabel("Laatste 5 orders", SwingConstants.CENTER);
 //        add(resultLabel, BorderLayout.EAST);
         try {
-            DefaultTableModel model = Database.executeQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 40");
+            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 40");
 
             //Test
 //            DefaultTableModel model = Database.executeQuery( "SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + 73585 + "'");

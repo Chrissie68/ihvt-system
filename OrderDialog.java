@@ -1,12 +1,9 @@
-import com.mysql.cj.x.protobuf.MysqlxCrud;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.util.concurrent.ExecutionException;
 
 public class OrderDialog extends JDialog implements ActionListener {
     private JButton AddOrderLine, RemoveOrderLine, ChangeQty;
@@ -31,7 +28,7 @@ public class OrderDialog extends JDialog implements ActionListener {
         ChangeQty.addActionListener(this);
 
         try {
-            DefaultTableModel model = Database.executeQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
             // Create JTable with the model
             ProductsShow = new JTable(model);
             // Add the table to a JScrollPane
@@ -68,7 +65,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                 QtyChangeDialog Qtychange = new QtyChangeDialog(frame, true, ProductsShow.getValueAt(row, 0), ProductsShow);
                 if(Qtychange.doneCheck){
                     try {
-                        DefaultTableModel model = Database.executeQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+                        DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
                         // Create JTable with the model
                         ProductsShow = new JTable(model);
                         // Add the table to a JScrollPane
@@ -92,7 +89,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                 Object OrderLineIdGet = ProductsShow.getValueAt(row, 0);
                 String query = "DELETE FROM orderlines WHERE OrderLineID = '" + OrderLineIdGet + "'";
                 Database.executeChangeQuery(query);
-                DefaultTableModel model = Database.executeQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
                 // Create JTable with the model
                 ProductsShow = new JTable(model);
                 // Add the table to a JScrollPane
@@ -105,6 +102,9 @@ public class OrderDialog extends JDialog implements ActionListener {
             catch(Exception a){
                 a.printStackTrace();
             }
+        }
+        if(e.getSource() == AddOrderLine){
+
         }
     }
 }
