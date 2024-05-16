@@ -104,7 +104,22 @@ public class OrderDialog extends JDialog implements ActionListener {
             }
         }
         if(e.getSource() == AddOrderLine){
-
+            AddProduct addproduct = new AddProduct(frame, true, order);
+            if(addproduct.checkDone){
+                try {
+                    DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+                    // Create JTable with the model
+                    ProductsShow = new JTable(model);
+                    // Add the table to a JScrollPane
+                    this.remove(scrollPane);
+                    this.scrollPane = new JScrollPane(ProductsShow);
+                    add(scrollPane);
+                    revalidate();
+                    System.out.println(ProductsShow.getValueAt(1,1));
+                } catch (SQLException a) {
+                    a.printStackTrace();
+                }
+            }
         }
     }
 }
