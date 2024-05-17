@@ -14,7 +14,7 @@ public class AddProduct extends JDialog implements ActionListener {
     public AddProduct(JFrame frame, Boolean modal, Object order){
         super(frame, modal);
         setTitle("Toevoegen product");
-        setLayout(new GridLayout(2, 2));
+        setLayout(new GridLayout(1, 4));
         this.order = order;
         confirm = new JButton("Confirm");
         confirm.addActionListener(this);
@@ -25,7 +25,7 @@ public class AddProduct extends JDialog implements ActionListener {
         add(hoeveelheid);
         add(hvlheidInvoer);
         add(confirm);
-        setSize(500,300);
+        setSize(800,100);
         setVisible(true);
     }
 

@@ -1,18 +1,21 @@
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
+import com.fazecast.jSerialComm.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GOOEY extends JFrame implements ActionListener {
 
     JButton ControlPanelButton;
-    static JLabel resultLabel;
     JButton OrderDialogButton;
     JTable orderShow;
+    SerialPort Arduino;
+    Object rowData;
+
 
     public GOOEY() {
         //Basic stuff
@@ -48,38 +51,37 @@ public class GOOEY extends JFrame implements ActionListener {
         ControlPanelButton.addActionListener(this);
         add(ControlPanelButton, BorderLayout.SOUTH);
 
-        //Adding last 5 orders
-//        resultLabel = new JLabel("Laatste 5 orders", SwingConstants.CENTER);
-//        add(resultLabel, BorderLayout.EAST);
         try {
             DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 40");
-
-            //Test
-//            DefaultTableModel model = Database.executeQuery( "SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + 73585 + "'");
-
-            // Create JTable with the model
             orderShow = new JTable(model);
-
-            // Add the table to a JScrollPane
             JScrollPane scrollPane = new JScrollPane(orderShow);
-
-            // Add JScrollPane to the frame
             add(scrollPane, BorderLayout.EAST);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //Double click added so information can be extracted from JTable
+        orderShow.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JTable orderShow = (JTable)mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = orderShow.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && row != -1) {
+                    rowData = orderShow.getValueAt(row, 0);
+                    System.out.println("Double clicked on: "+ rowData);
+                }
+            }
+        });
 
-
-
+        orderShow.setDefaultEditor(Object.class, null);
         this.setMinimumSize(new Dimension(800, 600));
-//        Database.loadResults();
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ControlPanelButton) {
+
             ControlPanel controlPanel = new ControlPanel(this, true);
         }
         if (e.getSource() == OrderDialogButton){
@@ -91,7 +93,26 @@ public class GOOEY extends JFrame implements ActionListener {
             catch(ArrayIndexOutOfBoundsException exception){
                 System.out.println("Het probleem is opgelost");
             }
+
+            Arduino = SerialPort.getCommPort("COM8");
+            Arduino.setComPortParameters(9600, 8, 1, 0);
+
+            if (Arduino.openPort()) {
+                System.out.println("poort open");
+            } else {
+                System.out.println("kan poort niet openen");
+                return;
+            }
+
+            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
+            ControlPanel controlPanel = new ControlPanel(this, true, Arduino);
+            Arduino.closePort();
+        }
+        if(e.getSource() == OrderDialogButton){
+            OrderDialog orderDialog = new OrderDialog(this, true, rowData);
+
         }
     }
 }
+
 

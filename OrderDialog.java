@@ -29,9 +29,7 @@ public class OrderDialog extends JDialog implements ActionListener {
 
         try {
             DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
-            // Create JTable with the model
             ProductsShow = new JTable(model);
-            // Add the table to a JScrollPane
             scrollPane = new JScrollPane(ProductsShow);
             System.out.println(ProductsShow.getValueAt(1,1));
 
@@ -66,9 +64,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                 if(Qtychange.doneCheck){
                     try {
                         DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
-                        // Create JTable with the model
                         ProductsShow = new JTable(model);
-                        // Add the table to a JScrollPane
                         JScrollPane newScrollPane = new JScrollPane(ProductsShow);
                         this.remove(scrollPane);
                         add(newScrollPane);
@@ -90,9 +86,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                 String query = "DELETE FROM orderlines WHERE OrderLineID = '" + OrderLineIdGet + "'";
                 Database.executeChangeQuery(query);
                 DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
-                // Create JTable with the model
                 ProductsShow = new JTable(model);
-                // Add the table to a JScrollPane
                 this.remove(scrollPane);
                 revalidate();
                 this.scrollPane = new JScrollPane(ProductsShow);
@@ -108,9 +102,7 @@ public class OrderDialog extends JDialog implements ActionListener {
             if(addproduct.checkDone){
                 try {
                     DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
-                    // Create JTable with the model
                     ProductsShow = new JTable(model);
-                    // Add the table to a JScrollPane
                     this.remove(scrollPane);
                     this.scrollPane = new JScrollPane(ProductsShow);
                     add(scrollPane);

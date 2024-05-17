@@ -9,7 +9,6 @@ public class Database {
     public static void executeChangeQuery(String query) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement()) {
-            // Execute the update query
             int rowsAffected = statement.executeUpdate(query);
             System.out.println(rowsAffected + " row(s) affected.");
         } catch (SQLException e) {

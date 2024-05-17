@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 
 public class QtyChangeDialog extends JDialog implements ActionListener {
 
-    JTable ProductsShowChange;
-    JScrollPane scrollPaneChange;
     JTextField input;
     JButton confirm;
     Object order;
