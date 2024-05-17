@@ -10,11 +10,12 @@ import java.awt.event.MouseEvent;
 
 public class GOOEY extends JFrame implements ActionListener {
 
-    JButton ControlPanelButton;
-    JButton OrderDialogButton;
+    JButton ControlPanelButton, StockCheckButton, AddOrderButton, infoButton;
     JTable orderShow;
     SerialPort Arduino;
     Object rowData;
+    JPanel buttonContainer;
+    JFrame thisFrame;
 
 
     public GOOEY() {
@@ -22,7 +23,19 @@ public class GOOEY extends JFrame implements ActionListener {
         this.setTitle("Warehouserobot");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
-
+        thisFrame = this;
+        StockCheckButton = new JButton("Bekijk voorraad");
+        StockCheckButton.addActionListener(this);
+        AddOrderButton = new JButton("Voeg order toe");
+        AddOrderButton.addActionListener(this);
+        infoButton = new JButton("?");
+        infoButton.addActionListener(this);
+        buttonContainer = new JPanel();
+        buttonContainer.setLayout(new FlowLayout());
+        buttonContainer.add(StockCheckButton);
+        buttonContainer.add(AddOrderButton);
+        buttonContainer.add(infoButton);
+        add(buttonContainer, BorderLayout.NORTH);
         //Define layout of storage
         JPanel rasterPanel = new JPanel(new GridLayout(5, 5));
 
@@ -38,13 +51,10 @@ public class GOOEY extends JFrame implements ActionListener {
             rowLabel++;
         }
         //Adding the storage layout to the GUI
-        this.add(rasterPanel, BorderLayout.CENTER);
+        add(rasterPanel, BorderLayout.CENTER);
 
-        //Adding button for JDialog to add/remove/alter orders
-        OrderDialogButton = new JButton("Order aanpassen");
-        OrderDialogButton.addActionListener(this);
-        OrderDialogButton.setOpaque(true);
-        add(OrderDialogButton, BorderLayout.NORTH);
+        //Adding button for JDialog to add/remove/alter orders REMOVED FUNCTIONALITY, ADDED DOUBLECLICK
+
 
         //Adding button for manual operation
         ControlPanelButton = new JButton("Handmatig bedienen");
@@ -59,16 +69,32 @@ public class GOOEY extends JFrame implements ActionListener {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        //Code werkt niet.
+//            Arduino = SerialPort.getCommPort("COM8");
+//            Arduino.setComPortParameters(9600, 8, 1, 0);
+//
+//            if (Arduino.openPort()) {
+//                System.out.println("poort open");
+//            } else {
+//                System.out.println("kan poort niet openen");
+//                return;
+//            }
+//
+//            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
+//            ControlPanel controlPanel = new ControlPanel(this, true/*, Arduino*/);
+//            Arduino.closePort();
+
         //Double click added so information can be extracted from JTable
         orderShow.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                JTable orderShow = (JTable)mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
                 int row = orderShow.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && row != -1) {
                     rowData = orderShow.getValueAt(row, 0);
                     System.out.println("Double clicked on: "+ rowData);
+                    OrderDialog orderDialog = new OrderDialog(thisFrame, true, rowData);
                 }
             }
         });
@@ -81,36 +107,10 @@ public class GOOEY extends JFrame implements ActionListener {
     }
         public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ControlPanelButton) {
-
             ControlPanel controlPanel = new ControlPanel(this, true);
         }
-        if (e.getSource() == OrderDialogButton){
-            try{
-                int row = orderShow.getSelectedRow();
-                System.out.println(orderShow.getValueAt(row, 0));
-                OrderDialog orderDialog = new OrderDialog(this, true, orderShow.getValueAt(row, 0));
-            }
-            catch(ArrayIndexOutOfBoundsException exception){
-                System.out.println("Het probleem is opgelost");
-            }
-
-            Arduino = SerialPort.getCommPort("COM8");
-            Arduino.setComPortParameters(9600, 8, 1, 0);
-
-            if (Arduino.openPort()) {
-                System.out.println("poort open");
-            } else {
-                System.out.println("kan poort niet openen");
-                return;
-            }
-
-            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
-            ControlPanel controlPanel = new ControlPanel(this, true, Arduino);
-            Arduino.closePort();
-        }
-        if(e.getSource() == OrderDialogButton){
-            OrderDialog orderDialog = new OrderDialog(this, true, rowData);
-
+        if(e.getSource() == StockCheckButton){
+            Stockcheck stockcheck = new Stockcheck(this, true);
         }
     }
 }

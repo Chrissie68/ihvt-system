@@ -3,20 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class QtyChangeDialog extends JDialog implements ActionListener {
+public class QtyChangeOrderlineDialog extends JDialog implements ActionListener {
 
     JTextField input;
     JButton confirm;
-    Object order;
+//    Object order;
     JTable tabel;
     int inputNumber;
     Boolean doneCheck = false;
-    public QtyChangeDialog(JFrame frame, Boolean modal, Object order, JTable tabel){
+    Object rowData;
+    public QtyChangeOrderlineDialog(JFrame frame, Boolean modal, Object rowData){
         super(frame, modal);
         setTitle("Aanpassen hoeveelheid");
         setLayout(new GridLayout(1, 1));
-        this.order = order;
-        this.tabel = tabel;
+//        this.order = order;
+        this.rowData = rowData;
         input = new JTextField("");
         confirm = new JButton("Confirm");
         confirm.addActionListener(this);
@@ -34,8 +35,8 @@ public class QtyChangeDialog extends JDialog implements ActionListener {
         if(e.getSource() == confirm){
             try{
                 int inputNumber = Integer.parseInt(input.getText());
-                int row = tabel.getSelectedRow();
-                Database.executeChangeQuery("UPDATE orderlines SET Quantity = '" + inputNumber + "' WHERE OrderLineID = '" + tabel.getValueAt(row, 0) + "'");
+//                int row = tabel.getSelectedRow();
+                Database.executeChangeQuery("UPDATE orderlines SET Quantity = '" + inputNumber + "' WHERE OrderLineID = '" + rowData + "'");
                 System.out.println("Het is gelukt");
                 doneCheck = true;
                 this.inputNumber = inputNumber;
