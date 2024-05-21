@@ -37,11 +37,7 @@ public class Stockcheck extends JDialog implements ActionListener {
                         QtyChangeStockDialog Qtychange = new QtyChangeStockDialog(frame, true, rowData);
                         if(Qtychange.doneCheck){
                             try {
-                                remove(scrollBar);
-                                ProductsShow = new JTable(Database.executeSelectQuery(selectQuery));
-                                scrollBar = new JScrollPane(ProductsShow);
-                                add(scrollBar);
-                                revalidate();
+                                ProductsShow.setModel(Database.executeSelectQuery(selectQuery));
                             } catch (SQLException a) {
                                 a.printStackTrace();
                             }
