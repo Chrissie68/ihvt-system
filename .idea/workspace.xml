@@ -5,22 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/QtyChangeStockDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stockcheck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/AddProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OrderDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QtyChangeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/QtyChangeOrderlineDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ihvt-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ihvt-system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/.idea/libraries/mysql_connector_j_8_4_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/.idea/libraries/mysql_connector_j_8_4_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtyChangeOrderlineDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/QtyChangeStockOrderlineDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stockcheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/Stockcheck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/AddProduct.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/AddProduct.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeDialog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ihvt-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/ihvt-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeOrderlineDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +48,7 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "StableBranch",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/bramsprokholt/Documents/HBO-ICT /KBS/Semester 2/ihvt-system"

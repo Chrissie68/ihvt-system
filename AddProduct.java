@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class AddProduct extends JDialog implements ActionListener {
     Object order;
@@ -37,10 +38,19 @@ public class AddProduct extends JDialog implements ActionListener {
             int stockItemId = Integer.parseInt(artklNrInvoer.getText());
             System.out.println("Artikelnr is: " + stockItemId);
             String query = "INSERT INTO orderlines(OrderID, StockItemID, Description, PackageTypeID, Quantity, TaxRate, PickedQuantity, LastEditedBy, LastEditedWhen) VALUES('" + order.toString() + "', '" + stockItemId + "', 'Dit is testcode', 4, '" + quantity + "', 15.0, 0, 3, '2024-05-01 12:00:00')";
-
-            Database.executeChangeQuery(query);
-            checkDone = true;
-            dispose();
+            if(Database.stockItemIdValid(stockItemId)){
+                if(Database.enoughStockCheck(quantity, stockItemId)){
+                    Database.executeChangeQuery(query);
+                    checkDone = true;
+                    dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "De voorraad strekt niet");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Dit artikelnummer bestaat niet");
+            }
         }
         catch(Exception a){
             a.printStackTrace();

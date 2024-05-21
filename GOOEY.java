@@ -62,7 +62,7 @@ public class GOOEY extends JFrame implements ActionListener {
         add(ControlPanelButton, BorderLayout.SOUTH);
 
         try {
-            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 40");
+            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC");
             orderShow = new JTable(model);
             JScrollPane scrollPane = new JScrollPane(orderShow);
             add(scrollPane, BorderLayout.EAST);

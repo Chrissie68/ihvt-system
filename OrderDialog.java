@@ -15,7 +15,8 @@ public class OrderDialog extends JDialog implements ActionListener {
     Object order;
     JFrame frame;
     JPanel container;
-    Object rowData;
+    Object rowDataOrderLineID;
+    Object rowDataStockItemID;
     public OrderDialog(JFrame frame, Boolean modal, Object order){
         super(frame, modal);
         setTitle("Order menu");
@@ -52,21 +53,14 @@ public class OrderDialog extends JDialog implements ActionListener {
                 Point point = mouseEvent.getPoint();
                 int row = ProductsShow.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && row != -1) {
-                    rowData = ProductsShow.getValueAt(row, 0);
-                    System.out.println("Double clicked on: "+ rowData);
+                    rowDataOrderLineID = ProductsShow.getValueAt(row, 0);
+                    rowDataStockItemID = ProductsShow.getValueAt(row, 1);
                     try{
-//                        int row = ProductsShow.getSelectedRow();
-//                        System.out.println(ProductsShow.getValueAt(row, 0));
-                        QtyChangeOrderlineDialog Qtychange = new QtyChangeOrderlineDialog(frame, true, rowData);
+                        QtyChangeStockOrderlineDialog Qtychange = new QtyChangeStockOrderlineDialog(frame, true, rowDataOrderLineID, rowDataStockItemID);
                         if(Qtychange.doneCheck){
                             try {
-                                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
-                                ProductsShow = new JTable(model);
-                                remove(scrollPane);
-                                scrollPane = new JScrollPane(ProductsShow);
-                                add(scrollPane);
-                                revalidate();
-                                System.out.println(rowData);
+                                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order + "'");
+                                ProductsShow.setModel(model);
                             } catch (SQLException a) {
                                 a.printStackTrace();
                             }

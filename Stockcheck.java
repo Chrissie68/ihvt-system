@@ -18,7 +18,7 @@ public class Stockcheck extends JDialog implements ActionListener {
         setLayout(new GridLayout(1,1 ));
         this.frame = frame;
         try{
-            selectQuery = "SELECT stockitems.StockItemID, StockItemName, QuantityOnHand FROM stockitems INNER JOIN stockitemholdings ON stockitems.StockItemID = stockitemholdings.StockItemID";
+            selectQuery = "SELECT StockItemName, stockitems.StockItemID, QuantityOnHand FROM stockitems INNER JOIN stockitemholdings ON stockitems.StockItemID = stockitemholdings.StockItemID";
             ProductsShow = new JTable(Database.executeSelectQuery(selectQuery));
             scrollBar = new JScrollPane(ProductsShow);
         }
@@ -31,7 +31,7 @@ public class Stockcheck extends JDialog implements ActionListener {
                 Point point = mouseEvent.getPoint();
                 int row = ProductsShow.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && row != -1) {
-                    rowData = ProductsShow.getValueAt(row, 0);
+                    rowData = ProductsShow.getValueAt(row, 1);
                     System.out.println("Double clicked on: "+ rowData);
                     try{
                         QtyChangeStockDialog Qtychange = new QtyChangeStockDialog(frame, true, rowData);
