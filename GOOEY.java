@@ -7,15 +7,15 @@ import javax.swing.table.DefaultTableModel;
 import com.fazecast.jSerialComm.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 public class GOOEY extends JFrame implements ActionListener {
 
-    JButton ControlPanelButton, StockCheckButton, AddOrderButton, infoButton;
-    JTable orderShow;
+    private final JButton ControlPanelButton, StockCheckButton, addOrderButton;
+    private JTable orderShow;
     SerialPort Arduino;
-    Object rowData;
-    JPanel buttonContainer;
-    JFrame thisFrame;
+    private Object orderID;
+    private final JFrame thisFrame;
 
 
     public GOOEY() {
@@ -26,14 +26,14 @@ public class GOOEY extends JFrame implements ActionListener {
         thisFrame = this;
         StockCheckButton = new JButton("Bekijk voorraad");
         StockCheckButton.addActionListener(this);
-        AddOrderButton = new JButton("Voeg order toe");
-        AddOrderButton.addActionListener(this);
-        infoButton = new JButton("?");
+        addOrderButton = new JButton("Voeg order toe");
+        addOrderButton.addActionListener(this);
+        JButton infoButton = new JButton("?");
         infoButton.addActionListener(this);
-        buttonContainer = new JPanel();
+        JPanel buttonContainer = new JPanel();
         buttonContainer.setLayout(new FlowLayout());
         buttonContainer.add(StockCheckButton);
-        buttonContainer.add(AddOrderButton);
+        buttonContainer.add(addOrderButton);
         buttonContainer.add(infoButton);
         add(buttonContainer, BorderLayout.NORTH);
         //Define layout of storage
@@ -52,9 +52,6 @@ public class GOOEY extends JFrame implements ActionListener {
         }
         //Adding the storage layout to the GUI
         add(rasterPanel, BorderLayout.CENTER);
-
-        //Adding button for JDialog to add/remove/alter orders REMOVED FUNCTIONALITY, ADDED DOUBLECLICK
-
 
         //Adding button for manual operation
         ControlPanelButton = new JButton("Handmatig bedienen");
@@ -82,7 +79,7 @@ public class GOOEY extends JFrame implements ActionListener {
 //            }
 //
 //            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
-//            ControlPanel controlPanel = new ControlPanel(this, true/*, Arduino*/);
+//            ControlPanelDialog controlPanel = new ControlPanelDialog(this, true/*, Arduino*/);
 //            Arduino.closePort();
 
         //Double click added so information can be extracted from JTable
@@ -92,9 +89,9 @@ public class GOOEY extends JFrame implements ActionListener {
                 Point point = mouseEvent.getPoint();
                 int row = orderShow.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && row != -1) {
-                    rowData = orderShow.getValueAt(row, 0);
-                    System.out.println("Double clicked on: "+ rowData);
-                    OrderDialog orderDialog = new OrderDialog(thisFrame, true, rowData);
+                    orderID = orderShow.getValueAt(row, 0);
+                    System.out.println("Double clicked on: "+ orderID);
+                    OrderDialog orderDialog = new OrderDialog(thisFrame, true, orderID);
                 }
             }
         });
@@ -107,10 +104,14 @@ public class GOOEY extends JFrame implements ActionListener {
     }
         public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ControlPanelButton) {
-            ControlPanel controlPanel = new ControlPanel(this, true);
+            ControlPanelDialog controlPanelDialog = new ControlPanelDialog(this, true);
         }
         if(e.getSource() == StockCheckButton){
-            Stockcheck stockcheck = new Stockcheck(this, true);
+            StockcheckDialog stockcheckDialog = new StockcheckDialog(this, true);
+        }
+        if(e.getSource() == addOrderButton){
+            Database.addOrder();
+            OrderDialog orderDialog = new OrderDialog(thisFrame, true, Objects.requireNonNull(Database.lastOrderID()));
         }
     }
 }

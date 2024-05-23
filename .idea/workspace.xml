@@ -5,7 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Stockcheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/Stockcheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/AddProductDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ControlPanelDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtyChangeStockDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/QtyChangeStockDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtyChangeStockOrderlineDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/QtyChangeStockOrderlineDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stockcheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/StockcheckDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/AddProduct.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockOrderlineDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockOrderlineDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

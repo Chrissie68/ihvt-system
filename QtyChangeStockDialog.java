@@ -5,13 +5,10 @@ import java.awt.event.ActionEvent;
 
 public class QtyChangeStockDialog extends JDialog implements ActionListener {
 
-    JTextField input;
-    JButton confirm;
-    //    Object order;
-    JTable tabel;
-    int inputNumber;
-    Boolean doneCheck = false;
-    Object rowData;
+    private JTextField input;
+    private final JButton confirm;
+    private Boolean doneCheck = false;
+    private Object rowData;
     public QtyChangeStockDialog(JFrame frame, Boolean modal, Object rowData){
         super(frame, modal);
         setTitle("Aanpassen hoeveelheid");
@@ -35,16 +32,18 @@ public class QtyChangeStockDialog extends JDialog implements ActionListener {
         if(e.getSource() == confirm){
             try{
                 int inputNumber = Integer.parseInt(input.getText());
-//                int row = tabel.getSelectedRow();
                 Database.executeChangeQuery("UPDATE stockitemholdings SET QuantityOnHand = '" + inputNumber + "' WHERE StockItemID = '" + rowData + "'");
                 System.out.println("Het is gelukt");
                 doneCheck = true;
-                this.inputNumber = inputNumber;
                 dispose();
             }
-            catch(Exception a){
-                a.printStackTrace();
+            catch(NumberFormatException n){
+                JOptionPane.showMessageDialog(null, "Voer een geldig getal in");
             }
         }
+    }
+
+    public Boolean getDoneCheck() {
+        return doneCheck;
     }
 }

@@ -8,33 +8,33 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 public class OrderDialog extends JDialog implements ActionListener {
-    private JButton AddOrderLine, RemoveOrderLine;
+    private final JButton AddOrderLine, RemoveOrderLine;
     private JLabel OrderNumber, ProductenLijst;
-    JScrollPane scrollPane;
-    JTable ProductsShow;
-    Object order;
-    JFrame frame;
-    JPanel container;
-    Object rowDataOrderLineID;
+    private JScrollPane scrollPane;
+    private JTable ProductsShow;
+    private Object orderID;
+    private JFrame frame;
+    private JPanel container;
+    private Object rowDataOrderLineID;
     Object rowDataStockItemID;
-    public OrderDialog(JFrame frame, Boolean modal, Object order){
+    public OrderDialog(JFrame frame, Boolean modal, Object orderID){
         super(frame, modal);
         setTitle("Order menu");
 //        setLayout(new GridLayout(10,3));
         setLayout(new GridLayout(2,1));
         this.frame = frame;
-        this.order = order;
+        this.orderID = orderID;
         AddOrderLine = new JButton("Product toevoegen");
         RemoveOrderLine = new JButton("Product verwijderen");
 
-        OrderNumber = new JLabel("Ordernummer: " + order);
+        OrderNumber = new JLabel("Ordernummer: " + orderID);
         ProductenLijst = new JLabel("Producten in de order");
         RemoveOrderLine.addActionListener(this);
         AddOrderLine.addActionListener(this);
 
 
         try {
-            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + orderID.toString() + "'");
             ProductsShow = new JTable(model);
             scrollPane = new JScrollPane(ProductsShow);
             scrollPane.setPreferredSize(new Dimension(1000, 200));
@@ -57,9 +57,9 @@ public class OrderDialog extends JDialog implements ActionListener {
                     rowDataStockItemID = ProductsShow.getValueAt(row, 1);
                     try{
                         QtyChangeStockOrderlineDialog Qtychange = new QtyChangeStockOrderlineDialog(frame, true, rowDataOrderLineID, rowDataStockItemID);
-                        if(Qtychange.doneCheck){
+                        if(Qtychange.getDoneCheck()){
                             try {
-                                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order + "'");
+                                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + orderID + "'");
                                 ProductsShow.setModel(model);
                             } catch (SQLException a) {
                                 a.printStackTrace();
@@ -88,7 +88,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                 Object OrderLineIdGet = ProductsShow.getValueAt(row, 0);
                 String query = "DELETE FROM orderlines WHERE OrderLineID = '" + OrderLineIdGet + "'";
                 Database.executeChangeQuery(query);
-                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + orderID.toString() + "'");
                 ProductsShow = new JTable(model);
                 this.remove(scrollPane);
                 revalidate();
@@ -101,16 +101,15 @@ public class OrderDialog extends JDialog implements ActionListener {
             }
         }
         if(e.getSource() == AddOrderLine){
-            AddProduct addproduct = new AddProduct(frame, true, order);
-            if(addproduct.checkDone){
+            AddProductDialog addproduct = new AddProductDialog(frame, true, orderID);
+            if(addproduct.getCheckDone()){
                 try {
-                    DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+                    DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + orderID.toString() + "'");
                     ProductsShow = new JTable(model);
                     this.remove(scrollPane);
                     this.scrollPane = new JScrollPane(ProductsShow);
                     add(scrollPane);
                     revalidate();
-                    System.out.println(ProductsShow.getValueAt(1,1));
                 } catch (SQLException a) {
                     a.printStackTrace();
                 }

@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ControlPanel extends JDialog implements ActionListener {
-    JButton left, right, up, down;
-    public ControlPanel(JFrame frame, boolean modal){
+public class ControlPanelDialog extends JDialog implements ActionListener {
+    private final JButton left, right, up, down;
+    public ControlPanelDialog(JFrame frame, boolean modal){
         super(frame, modal);
         setPreferredSize(new Dimension(300, 300));
         setLayout(new FlowLayout());

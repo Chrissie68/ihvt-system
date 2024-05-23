@@ -6,24 +6,20 @@ import javax.swing.JOptionPane;
 
 public class QtyChangeStockOrderlineDialog extends JDialog implements ActionListener {
 
-    JTextField input;
-    JButton confirm;
-    Boolean doneCheck = false;
-    int rowDataOrderLineID;
-    int rowDataStockItemID;
+    private JTextField input;
+    private final JButton confirm;
+    private Boolean doneCheck = false;
+    private int rowDataOrderLineID;
+    private int rowDataStockItemID;
     public QtyChangeStockOrderlineDialog(JFrame frame, Boolean modal, Object rowDataOrderLineID, Object rowDataStockItemID){
         super(frame, modal);
         setTitle("Aanpassen hoeveelheid");
         setLayout(new GridLayout(1, 1));
-//        this.order = order;
         this.rowDataOrderLineID = (int)rowDataOrderLineID;
         this.rowDataStockItemID = (int)rowDataStockItemID;
         input = new JTextField("");
         confirm = new JButton("Confirm");
         confirm.addActionListener(this);
-
-
-
         add(input);
         add(confirm);
         setSize(300,100);
@@ -44,9 +40,13 @@ public class QtyChangeStockOrderlineDialog extends JDialog implements ActionList
                     JOptionPane.showMessageDialog(null, "De voorraad strekt niet");
                 }
             }
-            catch(Exception a){
-                a.printStackTrace();
+            catch(NumberFormatException n){
+                JOptionPane.showMessageDialog(null, "Voer een geldig getal in");
             }
         }
+    }
+
+    public Boolean getDoneCheck() {
+        return doneCheck;
     }
 }

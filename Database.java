@@ -1,12 +1,13 @@
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Database {
-    static String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
-    static String username = "HMI";
-    static String password = "HMItest";
+    private static final String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
+    private static final String username = "HMI";
+    private static final String password = "HMItest";
 
     public static void executeChangeQuery(String query) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
@@ -77,4 +78,47 @@ public class Database {
         }
         return false;
     }
+
+    public static Object[] informationForInsertOrderLine(int stockItemID) {
+        String query = "SELECT StockItemName, UnitPackageID, TaxRate FROM stockitems WHERE StockItemID = '" + stockItemID + "'";
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next() && stockItemIdValid(stockItemID)) {
+                Object[] informationArray = new Object[3];
+                informationArray[0] = rs.getObject("StockItemName");
+                informationArray[1] = rs.getObject("UnitPackageID");
+                informationArray[2] = rs.getObject("TaxRate");
+                return informationArray;
+            } else {
+                System.out.println("No data found for StockItemID: " + stockItemID);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+        return null;
+    }
+    public static void addOrder(){
+        DateTimeFormatter dateWithHrs = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        String query = "INSERT INTO orders(CustomerID, SalespersonPersonID, ContactPersonID, OrderDate, ExpectedDeliveryDate, IsUndersupplyBackordered, LastEditedBy, LastEditedWhen) VALUES(1, 1, 1, '" + date.format(now) + "', '" + date.format(now) + "', 1, 9, '" + dateWithHrs.format(now) + "')";
+        executeChangeQuery(query);
+    }
+    public static String lastOrderID(){
+        String query = "SELECT max(OrderID) FROM orders";
+        try{
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                return rs.getString("max(OrderID)");
+            }
+        }
+        catch (SQLException n) {
+            throw new RuntimeException(n);
+        }
+        return null;
+    }
+
 }
