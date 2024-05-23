@@ -32,13 +32,17 @@ public class OrderDialog extends JDialog implements ActionListener {
         ExecuteOrderLine = new JButton("Uitvoeren order");
 
         OrderNumber = new JLabel("Ordernummer: " + order);
-        ProductenLijst = new JLabel("Producten in de order");
+        ProductenLijst = new JLabel("Producten in order");
         RemoveOrderLine.addActionListener(this);
         AddOrderLine.addActionListener(this);
         ExecuteOrderLine.addActionListener(this);
 
         try {
-            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+            DefaultTableModel model = Database.executeSelectQuery(
+                    "SELECT o.OrderLineID, o.StockItemID, s.Size " +
+                            "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
+                            "WHERE o.OrderID = '" + order.toString() + "'"
+            );
             ProductsShow = new JTable(model);
             scrollPane = new JScrollPane(ProductsShow);
             scrollPane.setPreferredSize(new Dimension(1000, 200));
@@ -64,7 +68,11 @@ public class OrderDialog extends JDialog implements ActionListener {
                         QtyChangeStockOrderlineDialog Qtychange = new QtyChangeStockOrderlineDialog(frame, true, rowDataOrderLineID, rowDataStockItemID);
                         if (Qtychange.doneCheck) {
                             try {
-                                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order + "'");
+                                DefaultTableModel model = Database.executeSelectQuery(
+                                        "SELECT o.OrderLineID, o.StockItemID, s.Size " +
+                                                "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
+                                                "WHERE o.OrderID = '" + order + "'"
+                                );
                                 ProductsShow.setModel(model);
                             } catch (SQLException a) {
                                 a.printStackTrace();
@@ -92,7 +100,11 @@ public class OrderDialog extends JDialog implements ActionListener {
                 Object OrderLineIdGet = ProductsShow.getValueAt(row, 0);
                 String query = "DELETE FROM orderlines WHERE OrderLineID = '" + OrderLineIdGet + "'";
                 Database.executeChangeQuery(query);
-                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+                DefaultTableModel model = Database.executeSelectQuery(
+                        "SELECT o.OrderLineID, o.StockItemID, s.Size " +
+                                "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
+                                "WHERE o.OrderID = '" + order.toString() + "'"
+                );
                 ProductsShow = new JTable(model);
                 this.remove(scrollPane);
                 revalidate();
@@ -107,7 +119,11 @@ public class OrderDialog extends JDialog implements ActionListener {
             AddProduct addproduct = new AddProduct(frame, true, order);
             if (addproduct.checkDone) {
                 try {
-                    DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + order.toString() + "'");
+                    DefaultTableModel model = Database.executeSelectQuery(
+                            "SELECT o.OrderLineID, o.StockItemID, s.Size " +
+                                    "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
+                                    "WHERE o.OrderID = '" + order.toString() + "'"
+                    );
                     ProductsShow = new JTable(model);
                     this.remove(scrollPane);
                     this.scrollPane = new JScrollPane(ProductsShow);
@@ -129,7 +145,7 @@ public class OrderDialog extends JDialog implements ActionListener {
             DefaultTableModel model = Database.executeSelectQuery(
                     "SELECT o.OrderLineID, o.StockItemID, s.Size " +
                             "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
-                            "WHERE o.OrderId = '" + order.toString() + "'"
+                            "WHERE o.OrderID = '" + order.toString() + "'"
             );
             List<Object[]> orderLines = new ArrayList<>();
             for (int i = 0; i < model.getRowCount(); i++) {
@@ -140,10 +156,8 @@ public class OrderDialog extends JDialog implements ActionListener {
                 orderLines.add(row);
             }
 
-            // Apply first-fit algorithm to organize order lines into boxes
             List<List<Object[]>> boxes = firstFitAlgorithm(orderLines);
 
-            // Display the organized boxes in a new dialog
             new OrderVisualizationDialog(frame, true, boxes);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -154,11 +168,11 @@ public class OrderDialog extends JDialog implements ActionListener {
         List<List<Object[]>> boxes = new ArrayList<>();
 
         for (Object[] orderLine : orderLines) {
-            double size = (double) orderLine[2];
+            double size = Double.parseDouble((String) orderLine[2]);
             boolean placed = false;
             for (List<Object[]> box : boxes) {
-                double currentBoxSize = box.stream().mapToDouble(line -> (double) line[2]).sum();
-                if (currentBoxSize + size <= 20) {
+                double currentBoxSize = box.stream().mapToDouble(line -> Double.parseDouble((String) line[2])).sum();
+                if (currentBoxSize + size <= BoxSize) {
                     box.add(orderLine);
                     placed = true;
                     break;
