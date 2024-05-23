@@ -5,11 +5,15 @@ import java.util.List;
 public class OrderVisualizationDialog extends JDialog {
     int DoosNummer = 1;
     JButton PrintKnop;
+    JButton StartenOrder;
 
     public OrderVisualizationDialog(JFrame frame, boolean modal, List<List<Object[]>> boxes) {
         super(frame, modal);
         setTitle("Order visualizatie");
-        setLayout(new GridLayout(boxes.size(), 1));
+        setLayout(new BorderLayout());
+
+        JPanel boxesPanel = new JPanel();
+        boxesPanel.setLayout(new GridLayout(boxes.size(), 1));
 
         for (List<Object[]> box : boxes) {
             JPanel boxPanel = new JPanel();
@@ -33,8 +37,15 @@ public class OrderVisualizationDialog extends JDialog {
             boxPanel.add(itemsPanel, BorderLayout.CENTER);
             boxPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-            add(boxPanel);
+            boxesPanel.add(boxPanel);
         }
+
+        add(boxesPanel, BorderLayout.CENTER);
+
+        StartenOrder = new JButton("Starten Order");
+        JPanel startOrderPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        startOrderPanel.add(StartenOrder);
+        add(startOrderPanel, BorderLayout.SOUTH);
 
         setSize(600, 400);
         setLocationRelativeTo(frame);

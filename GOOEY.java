@@ -36,10 +36,9 @@ public class GOOEY extends JFrame implements ActionListener {
         buttonContainer.add(AddOrderButton);
         buttonContainer.add(infoButton);
         add(buttonContainer, BorderLayout.NORTH);
-        //Define layout of storage
+
         JPanel rasterPanel = new JPanel(new GridLayout(5, 5));
 
-        //Filling the layout with boxes
         char rowLabel = 'A';
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -50,19 +49,15 @@ public class GOOEY extends JFrame implements ActionListener {
             }
             rowLabel++;
         }
-        //Adding the storage layout to the GUI
         add(rasterPanel, BorderLayout.CENTER);
 
-        //Adding button for JDialog to add/remove/alter orders REMOVED FUNCTIONALITY, ADDED DOUBLECLICK
 
-
-        //Adding button for manual operation
         ControlPanelButton = new JButton("Handmatig bedienen");
         ControlPanelButton.addActionListener(this);
         add(ControlPanelButton, BorderLayout.SOUTH);
 
         try {
-            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC");
+            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC Limit 5;");
             orderShow = new JTable(model);
             JScrollPane scrollPane = new JScrollPane(orderShow);
             add(scrollPane, BorderLayout.EAST);
@@ -85,7 +80,6 @@ public class GOOEY extends JFrame implements ActionListener {
 //            ControlPanel controlPanel = new ControlPanel(this, true/*, Arduino*/);
 //            Arduino.closePort();
 
-        //Double click added so information can be extracted from JTable
         orderShow.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {

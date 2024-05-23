@@ -20,6 +20,8 @@ public class OrderDialog extends JDialog implements ActionListener {
     Object rowDataOrderLineID;
     Object rowDataStockItemID;
     int BoxSize = 20;
+    String OrderQuery = "SELECT o.OrderLineID, o.StockItemID, o.Quantity, s.Size FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID WHERE o.OrderID =";
+    String DeleteQuery = "DELETE FROM orderlines WHERE OrderLineID =";
 
     public OrderDialog(JFrame frame, Boolean modal, Object order) {
         super(frame, modal);
@@ -38,11 +40,7 @@ public class OrderDialog extends JDialog implements ActionListener {
         ExecuteOrderLine.addActionListener(this);
 
         try {
-            DefaultTableModel model = Database.executeSelectQuery(
-                    "SELECT o.OrderLineID, o.StockItemID, s.Size " +
-                            "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
-                            "WHERE o.OrderID = '" + order.toString() + "'"
-            );
+            DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order.toString());
             ProductsShow = new JTable(model);
             scrollPane = new JScrollPane(ProductsShow);
             scrollPane.setPreferredSize(new Dimension(1000, 200));
@@ -53,8 +51,9 @@ public class OrderDialog extends JDialog implements ActionListener {
         container.add(OrderNumber);
         container.add(AddOrderLine);
         container.add(RemoveOrderLine);
-        container.add(ProductenLijst);
         container.add(ExecuteOrderLine);
+        container.add(ProductenLijst);
+
 
         ProductsShow.addMouseListener(new MouseAdapter() {
             @Override
@@ -68,11 +67,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                         QtyChangeStockOrderlineDialog Qtychange = new QtyChangeStockOrderlineDialog(frame, true, rowDataOrderLineID, rowDataStockItemID);
                         if (Qtychange.doneCheck) {
                             try {
-                                DefaultTableModel model = Database.executeSelectQuery(
-                                        "SELECT o.OrderLineID, o.StockItemID, s.Size " +
-                                                "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
-                                                "WHERE o.OrderID = '" + order + "'"
-                                );
+                                DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order);
                                 ProductsShow.setModel(model);
                             } catch (SQLException a) {
                                 a.printStackTrace();
@@ -98,13 +93,8 @@ public class OrderDialog extends JDialog implements ActionListener {
             try {
                 int row = ProductsShow.getSelectedRow();
                 Object OrderLineIdGet = ProductsShow.getValueAt(row, 0);
-                String query = "DELETE FROM orderlines WHERE OrderLineID = '" + OrderLineIdGet + "'";
-                Database.executeChangeQuery(query);
-                DefaultTableModel model = Database.executeSelectQuery(
-                        "SELECT o.OrderLineID, o.StockItemID, s.Size " +
-                                "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
-                                "WHERE o.OrderID = '" + order.toString() + "'"
-                );
+                Database.executeChangeQuery(DeleteQuery + OrderLineIdGet);
+                DefaultTableModel model = Database.executeSelectQuery(OrderQuery+ order.toString());
                 ProductsShow = new JTable(model);
                 this.remove(scrollPane);
                 revalidate();
@@ -119,11 +109,7 @@ public class OrderDialog extends JDialog implements ActionListener {
             AddProduct addproduct = new AddProduct(frame, true, order);
             if (addproduct.checkDone) {
                 try {
-                    DefaultTableModel model = Database.executeSelectQuery(
-                            "SELECT o.OrderLineID, o.StockItemID, s.Size " +
-                                    "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
-                                    "WHERE o.OrderID = '" + order.toString() + "'"
-                    );
+                    DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order.toString());
                     ProductsShow = new JTable(model);
                     this.remove(scrollPane);
                     this.scrollPane = new JScrollPane(ProductsShow);
@@ -142,11 +128,7 @@ public class OrderDialog extends JDialog implements ActionListener {
 
     private void executeOrder() {
         try {
-            DefaultTableModel model = Database.executeSelectQuery(
-                    "SELECT o.OrderLineID, o.StockItemID, s.Size " +
-                            "FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID " +
-                            "WHERE o.OrderID = '" + order.toString() + "'"
-            );
+            DefaultTableModel model = Database.executeSelectQuery("SELECT o.OrderLineID, o.StockItemID, s.Size, o.Quantity FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID WHERE o.OrderID = '" + order.toString() + "'");
             List<Object[]> orderLines = new ArrayList<>();
             for (int i = 0; i < model.getRowCount(); i++) {
                 Object[] row = new Object[model.getColumnCount()];
