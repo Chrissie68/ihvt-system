@@ -2,6 +2,7 @@
   <library name="jSerialComm-2.11.0 (1)">
     <CLASSES>
       <root url="jar://$USER_HOME$/Downloads/jSerialComm-2.11.0 (1).jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jSerialComm-2.11.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
