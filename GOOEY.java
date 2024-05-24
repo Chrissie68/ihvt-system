@@ -58,19 +58,15 @@ public class GOOEY extends JFrame implements ActionListener {
         ControlPanelButton.addActionListener(this);
         add(ControlPanelButton, BorderLayout.SOUTH);
 
-        if(Database.isDatabase()) {
-            try {
-                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC");
-                orderShow = new JTable(model);
-                JScrollPane scrollPane = new JScrollPane(orderShow);
-                add(scrollPane, BorderLayout.EAST);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC");
+            orderShow = new JTable(model);
+            JScrollPane scrollPane = new JScrollPane(orderShow);
+            add(scrollPane, BorderLayout.EAST);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        else{
-            JOptionPane.showMessageDialog(null, "De database is offline");
-        }
+
 
         //Code werkt niet.
 //            Arduino = SerialPort.getCommPort("COM8");

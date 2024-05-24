@@ -11,7 +11,6 @@ public class Database {
     private static final String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
     private static final String username = "HMI";
     private static final String password = "HMItest";
-    private static boolean database = true;
 
     public static void executeChangeQuery(String query) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
@@ -20,7 +19,6 @@ public class Database {
             System.out.println(rowsAffected + " row(s) affected.");
         } catch (CommunicationsException e) {
             e.printStackTrace();
-            database = false;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -126,10 +124,5 @@ public class Database {
             throw new RuntimeException(n);
         }
         return null;
-    }
-
-
-    public static boolean isDatabase() {
-        return database;
     }
 }
