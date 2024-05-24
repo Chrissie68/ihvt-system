@@ -1,4 +1,7 @@
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+
 import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
@@ -8,14 +11,18 @@ public class Database {
     private static final String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
     private static final String username = "HMI";
     private static final String password = "HMItest";
+    private static boolean database = true;
 
     public static void executeChangeQuery(String query) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement()) {
             int rowsAffected = statement.executeUpdate(query);
             System.out.println(rowsAffected + " row(s) affected.");
-        } catch (SQLException e) {
+        } catch (CommunicationsException e) {
             e.printStackTrace();
+            database = false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -121,4 +128,8 @@ public class Database {
         return null;
     }
 
+
+    public static boolean isDatabase() {
+        return database;
+    }
 }
