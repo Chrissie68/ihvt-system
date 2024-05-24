@@ -20,7 +20,7 @@ public class OrderDialog extends JDialog implements ActionListener {
     Object rowDataOrderLineID;
     Object rowDataStockItemID;
     int BoxSize = 20;
-    String OrderQuery = "SELECT o.OrderLineID, o.StockItemID, o.Quantity, s.Size FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID WHERE o.OrderID =";
+    String OrderQuery = "SELECT S.StockItemName, o.OrderLineID, o.StockItemID, o.Quantity, s.Size FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID WHERE o.OrderID =";
     String DeleteQuery = "DELETE FROM orderlines WHERE OrderLineID =";
 
     public OrderDialog(JFrame frame, Boolean modal, Object order) {
@@ -128,7 +128,7 @@ public class OrderDialog extends JDialog implements ActionListener {
 
     private void executeOrder() {
         try {
-            DefaultTableModel model = Database.executeSelectQuery("SELECT o.OrderLineID, o.StockItemID, s.Size, o.Quantity FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID WHERE o.OrderID = '" + order.toString() + "'");
+            DefaultTableModel model = Database.executeSelectQuery("SELECT o.OrderLineID, s.StockItemName, o.StockItemID, s.Size, o.Quantity FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID WHERE o.OrderID = '" + order.toString() + "'");
             List<Object[]> orderLines = new ArrayList<>();
             for (int i = 0; i < model.getRowCount(); i++) {
                 Object[] row = new Object[model.getColumnCount()];
@@ -140,7 +140,11 @@ public class OrderDialog extends JDialog implements ActionListener {
 
             List<List<Object[]>> boxes = firstFitAlgorithm(orderLines);
 
-            new OrderVisualizationDialog(frame, true, boxes);
+            if (boxes != null) {
+                new OrderVisualizationDialog(frame, true, boxes);
+            } else {
+                System.out.println("Sorteren gefaald, artikelen hebben ongeldige maat");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -148,25 +152,27 @@ public class OrderDialog extends JDialog implements ActionListener {
 
     private List<List<Object[]>> firstFitAlgorithm(List<Object[]> orderLines) {
         List<List<Object[]>> boxes = new ArrayList<>();
-
-        for (Object[] orderLine : orderLines) {
-            double size = Double.parseDouble((String) orderLine[2]);
-            boolean placed = false;
-            for (List<Object[]> box : boxes) {
-                double currentBoxSize = box.stream().mapToDouble(line -> Double.parseDouble((String) line[2])).sum();
-                if (currentBoxSize + size <= BoxSize) {
-                    box.add(orderLine);
-                    placed = true;
-                    break;
+        try {
+            for (Object[] orderLine : orderLines) {
+                double size = Double.parseDouble(orderLine[3].toString());
+                boolean placed = false;
+                for (List<Object[]> box : boxes) {
+                    double currentBoxSize = box.stream().mapToDouble(line -> Double.parseDouble(line[2].toString())).sum();
+                    if (currentBoxSize + size <= BoxSize) {
+                        box.add(orderLine);
+                        placed = true;
+                        break;
+                    }
+                }
+                if (!placed) {
+                    List<Object[]> newBox = new ArrayList<>();
+                    newBox.add(orderLine);
+                    boxes.add(newBox);
                 }
             }
-            if (!placed) {
-                List<Object[]> newBox = new ArrayList<>();
-                newBox.add(orderLine);
-                boxes.add(newBox);
-            }
+        } catch (NumberFormatException e) {
+            return null;
         }
-
         return boxes;
     }
 }

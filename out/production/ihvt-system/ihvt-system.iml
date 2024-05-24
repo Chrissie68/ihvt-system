@@ -26,5 +26,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="itextpdf.maven.itextdoc" level="project" />
   </component>
 </module>

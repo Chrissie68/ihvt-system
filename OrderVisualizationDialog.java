@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class OrderVisualizationDialog extends JDialog {
     int DoosNummer = 1;
-    JButton PrintKnop;
     JButton StartenOrder;
 
     public OrderVisualizationDialog(JFrame frame, boolean modal, List<List<Object[]>> boxes) {
@@ -16,6 +17,7 @@ public class OrderVisualizationDialog extends JDialog {
         boxesPanel.setLayout(new GridLayout(boxes.size(), 1));
 
         for (List<Object[]> box : boxes) {
+            int currentDoosNummer = DoosNummer;
             JPanel boxPanel = new JPanel();
             boxPanel.setLayout(new BorderLayout());
             boxPanel.setBorder(BorderFactory.createTitledBorder("Doos " + DoosNummer));
@@ -25,14 +27,22 @@ public class OrderVisualizationDialog extends JDialog {
             itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
 
             for (Object[] item : box) {
-                JLabel itemLabel = new JLabel("Item ID: " + item[1] + ", Size: " + item[2]);
+                JLabel itemLabel = new JLabel("Name: " + item[1] + ", Item ID: " + item[2] + ", Size: " + item[3] + ", Quantity: " + item[4]);
                 itemsPanel.add(itemLabel);
                 itemsPanel.add(Box.createVerticalStrut(5));
             }
 
-            PrintKnop = new JButton("Print");
+            JButton printKnop = new JButton("Print");
+            printKnop.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    PackingSlip packingSlip = new PackingSlip(currentDoosNummer, box);
+                    System.out.println("Bon aangemaakt voor Doos " + currentDoosNummer);
+                }
+            });
+
             JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            buttonPanel.add(PrintKnop);
+            buttonPanel.add(printKnop);
 
             boxPanel.add(itemsPanel, BorderLayout.CENTER);
             boxPanel.add(buttonPanel, BorderLayout.SOUTH);
