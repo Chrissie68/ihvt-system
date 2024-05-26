@@ -84,6 +84,7 @@ public class OrderDialog extends JDialog implements ActionListener {
         add(scrollPane);
         ProductsShow.setDefaultEditor(Object.class, null);
         setSize(1000, 500);
+        setLocationRelativeTo(frame);
         setVisible(true);
     }
 
@@ -141,7 +142,7 @@ public class OrderDialog extends JDialog implements ActionListener {
             List<List<Object[]>> boxes = firstFitAlgorithm(orderLines);
 
             if (boxes != null) {
-                new OrderVisualizationDialog(frame, true, boxes);
+                new OrderVisualizationDialog(order, frame, true, boxes);
             } else {
                 System.out.println("Sorteren gefaald, artikelen hebben ongeldige maat");
             }

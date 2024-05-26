@@ -8,7 +8,7 @@ public class OrderVisualizationDialog extends JDialog {
     int DoosNummer = 1;
     JButton StartenOrder;
 
-    public OrderVisualizationDialog(JFrame frame, boolean modal, List<List<Object[]>> boxes) {
+    public OrderVisualizationDialog(Object order, JFrame frame, boolean modal, List<List<Object[]>> boxes) {
         super(frame, modal);
         setTitle("Order visualizatie");
         setLayout(new BorderLayout());
@@ -32,12 +32,17 @@ public class OrderVisualizationDialog extends JDialog {
                 itemsPanel.add(Box.createVerticalStrut(5));
             }
 
+            // aanmaken printknop per doos
             JButton printKnop = new JButton("Print");
             printKnop.addActionListener(new ActionListener() {
                 @Override
+
                 public void actionPerformed(ActionEvent e) {
-                    PackingSlip packingSlip = new PackingSlip(currentDoosNummer, box);
-                    System.out.println("Bon aangemaakt voor Doos " + currentDoosNummer);
+                    if (e.getSource() == printKnop) {
+                        PackingSlipDialog packingSlipDialog = new PackingSlipDialog(frame, true, order, currentDoosNummer, box);
+                    }
+//                    PackingSlip PackingSlip = new PackingSlip(order, currentDoosNummer, box);
+//                    System.out.println("Bon aangemaakt voor Doos " + currentDoosNummer);
                 }
             });
 

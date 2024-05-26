@@ -27,6 +27,7 @@ public class AddProduct extends JDialog implements ActionListener {
         add(hvlheidInvoer);
         add(confirm);
         setSize(800,100);
+        setLocationRelativeTo(frame);
         setVisible(true);
     }
 

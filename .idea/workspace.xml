@@ -4,22 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/itextpdf_maven_itextdoc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PackingSlip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jSerialComm_2_11_0__1_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jSerialComm_2_11_0__1_.xml" afterDir="false" />
+    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="pdfV0.1">
+      <change afterPath="$PROJECT_DIR$/PackingSlipDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/AddProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OrderDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OrderVisualizationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderVisualizationDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ihvt-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ihvt-system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/.idea/libraries/jSerialComm_2_11_0__1_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/.idea/libraries/jSerialComm_2_11_0__1_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PackingSlip.java" beforeDir="false" afterPath="$PROJECT_DIR$/PackingSlip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtyChangeStockDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/QtyChangeStockDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stockcheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/Stockcheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace 2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/AddProduct.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/AddProduct.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderVisualizationDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderVisualizationDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ihvt-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/ihvt-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,11 +109,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716464580615</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="pdfV0.1">
+      <option name="closed" value="true" />
+      <created>1716549815152</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716549815152</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="pdfV0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="pdfV0.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -52,6 +52,7 @@ public class Stockcheck extends JDialog implements ActionListener {
         add(scrollBar);
         ProductsShow.setDefaultEditor(Object.class, null);
         setSize(1000,500);
+        setLocationRelativeTo(frame);
         setVisible(true);
     }
 
