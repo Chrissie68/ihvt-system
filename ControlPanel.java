@@ -2,11 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.fazecast.jSerialComm.*;
 
 public class ControlPanel extends JDialog implements ActionListener {
     JButton left, right, up, down;
-    public ControlPanel(JFrame frame, boolean modal){
+    SerialPort Arduino;
+    public ControlPanel(JFrame frame, boolean modal, SerialPort Arduino){
         super(frame, modal);
+        this.Arduino = Arduino;
         setPreferredSize(new Dimension(300, 300));
         setLayout(new FlowLayout());
         setTitle("Control Panel");
@@ -34,15 +37,18 @@ public class ControlPanel extends JDialog implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        String message = "";
         if (e.getSource() == left) {
-            System.out.println("left");
+            message = "left";
         } else if (e.getSource() == right) {
-            System.out.println("right");
+            message = "right";
         } else if (e.getSource() == up) {
-            System.out.println("up");
+            message = "up";
         } else if (e.getSource() == down) {
-            System.out.println("down");
+            message = "down";
         }
+        byte[] messageBytes = message.getBytes();
+        Arduino.writeBytes(messageBytes, messageBytes.length);
     }
 }
 

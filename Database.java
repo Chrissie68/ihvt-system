@@ -4,7 +4,7 @@ import java.sql.*;
 import java.sql.ResultSet;
 
 public class Database {
-    static String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
+    static String url = "jdbc:mysql://localhost:3306/nerdygadgets";
     static String username = "root";
     static String password = "";
 

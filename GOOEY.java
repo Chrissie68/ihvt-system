@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import com.fazecast.jSerialComm.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import com.fazecast.jSerialComm.*;
 
 public class GOOEY extends JFrame implements ActionListener {
 
@@ -100,9 +101,22 @@ public class GOOEY extends JFrame implements ActionListener {
         this.setVisible(true);
     }
         public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == ControlPanelButton) {
-            ControlPanel controlPanel = new ControlPanel(this, true);
-        }
+            if (e.getSource() == ControlPanelButton) {
+                Arduino = SerialPort.getCommPort("COM8");
+                Arduino.setComPortParameters(9600, 8, 1, 0);
+
+                if (Arduino.openPort()) {
+                    System.out.println("poort open");
+                } else {
+                    System.out.println("kan poort niet openen");
+                    return;
+                }
+
+                try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
+                ControlPanel controlPanel = new ControlPanel(this, true, Arduino);
+                Arduino.closePort();
+
+            }
         if(e.getSource() == StockCheckButton){
             Stockcheck stockcheck = new Stockcheck(this, true);
         }
