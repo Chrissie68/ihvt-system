@@ -42,6 +42,7 @@ public class OrderDialog extends JDialog implements ActionListener {
         try {
             DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order.toString());
             ProductsShow = new JTable(model);
+            ProductsShow.getTableHeader().setReorderingAllowed(false);
             scrollPane = new JScrollPane(ProductsShow);
             scrollPane.setPreferredSize(new Dimension(1000, 200));
         } catch (SQLException e) {
@@ -93,15 +94,18 @@ public class OrderDialog extends JDialog implements ActionListener {
         if (e.getSource() == RemoveOrderLine) {
             try {
                 int row = ProductsShow.getSelectedRow();
-                Object OrderLineIdGet = ProductsShow.getValueAt(row, 0);
-                Database.executeChangeQuery(DeleteQuery + OrderLineIdGet);
-                DefaultTableModel model = Database.executeSelectQuery(OrderQuery+ order.toString());
-                ProductsShow = new JTable(model);
-                this.remove(scrollPane);
-                revalidate();
-                this.scrollPane = new JScrollPane(ProductsShow);
-                add(scrollPane);
-                revalidate();
+                if (row != -1) {
+                    Object OrderLineIdGet = ProductsShow.getValueAt(row, 1);
+                    Database.executeChangeQuery(DeleteQuery + OrderLineIdGet);
+                    DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order.toString());
+                    ProductsShow = new JTable(model);
+                    this.remove(scrollPane);
+                    this.scrollPane = new JScrollPane(ProductsShow);
+                    add(scrollPane);
+                    revalidate();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Selecteer een rij om te verwijderen.");
+                }
             } catch (Exception a) {
                 a.printStackTrace();
             }

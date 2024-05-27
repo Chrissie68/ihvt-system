@@ -22,7 +22,6 @@ public class PackingSlipDialog extends JDialog implements ActionListener {
         this.box = box;
 
         // aanmaken knoppen/tekst
-
         this.text = new JLabel("Weet je zeker dat je een pakbon wilt maken voor order: " + order + ", doos " + currentDoosNummer + "?");
         this.confirm = new JButton("Bevestigen");
         this.confirm.addActionListener(this);
