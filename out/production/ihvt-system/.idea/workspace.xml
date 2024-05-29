@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TSPAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/TSPAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/TSPAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/TSPAlgorithm.class" afterDir="false" />
-    </list>
+    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,16 +28,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "StableBranch",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/bramsprokholt/Documents/HBO-ICT /KBS/Semester 2/ihvt-system backup"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;StableBranch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/bramsprokholt/Documents/HBO-ICT /KBS/Semester 2/ihvt-system backup&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
