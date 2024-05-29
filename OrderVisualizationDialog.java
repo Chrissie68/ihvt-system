@@ -4,9 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class OrderVisualizationDialog extends JDialog {
+public class OrderVisualizationDialog extends JDialog implements ActionListener {
     int DoosNummer = 1;
     JButton StartenOrder;
+    private Boolean doneCheck = false;
 
     public OrderVisualizationDialog(Object order, JFrame frame, boolean modal, List<List<Object[]>> boxes) {
         super(frame, modal);
@@ -58,6 +59,7 @@ public class OrderVisualizationDialog extends JDialog {
         add(boxesPanel, BorderLayout.CENTER);
 
         StartenOrder = new JButton("Starten Order");
+        StartenOrder.addActionListener(this);
         JPanel startOrderPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         startOrderPanel.add(StartenOrder);
         add(startOrderPanel, BorderLayout.SOUTH);
@@ -65,5 +67,16 @@ public class OrderVisualizationDialog extends JDialog {
         setSize(600, 400);
         setLocationRelativeTo(frame);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == StartenOrder){
+            doneCheck = true;
+        }
+    }
+
+    public Boolean getDoneCheck() {
+        return doneCheck;
     }
 }

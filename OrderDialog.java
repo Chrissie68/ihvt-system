@@ -1,3 +1,5 @@
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDialog extends JDialog implements ActionListener {
-    private final JButton AddOrderLine, RemoveOrderLine;
+    private final JButton AddOrderLine, RemoveOrderLine, ExecuteOrderLine;
     private JLabel OrderNumber, ProductenLijst;
     private JScrollPane scrollPane;
     private JTable ProductsShow;
@@ -28,12 +30,12 @@ public class OrderDialog extends JDialog implements ActionListener {
         setTitle("Order menu");
         setLayout(new GridLayout(2, 1));
         this.frame = frame;
-        this.orderID = orderID;
+        this.orderID = order;
         AddOrderLine = new JButton("Product toevoegen");
         RemoveOrderLine = new JButton("Product verwijderen");
         ExecuteOrderLine = new JButton("Uitvoeren order");
 
-        OrderNumber = new JLabel("Ordernummer: " + orderID);
+        OrderNumber = new JLabel("Ordernummer: " + order);
         ProductenLijst = new JLabel("Producten in de order");
         RemoveOrderLine.addActionListener(this);
         AddOrderLine.addActionListener(this);
@@ -99,7 +101,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                 if (row != -1) {
                     Object OrderLineIdGet = ProductsShow.getValueAt(row, 1);
                     Database.executeChangeQuery(DeleteQuery + OrderLineIdGet);
-                    DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order.toString());
+                    DefaultTableModel model = Database.executeSelectQuery(OrderQuery + orderID.toString());
                     ProductsShow = new JTable(model);
                     ProductsShow.getTableHeader().setReorderingAllowed(false);
                     this.remove(scrollPane);
@@ -117,7 +119,7 @@ public class OrderDialog extends JDialog implements ActionListener {
             AddProductDialog addproduct = new AddProductDialog(frame, true, orderID);
             if(addproduct.getCheckDone()){
                 try {
-                    DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order.toString());
+                    DefaultTableModel model = Database.executeSelectQuery(OrderQuery + orderID.toString());
                     ProductsShow = new JTable(model);
                     ProductsShow.getTableHeader().setReorderingAllowed(false);
                     this.remove(scrollPane);
@@ -136,7 +138,7 @@ public class OrderDialog extends JDialog implements ActionListener {
 
     private void executeOrder() {
         try {
-            DefaultTableModel model = Database.executeSelectQuery("SELECT o.OrderLineID, s.StockItemName, o.StockItemID, s.Size, o.Quantity FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID WHERE o.OrderID = '" + order.toString() + "'");
+            DefaultTableModel model = Database.executeSelectQuery("SELECT o.OrderLineID, s.StockItemName, o.StockItemID, s.Size, o.Quantity FROM orderlines o JOIN stockitems s ON o.StockItemID = s.StockItemID WHERE o.OrderID = '" + orderID.toString() + "'");
             List<Object[]> orderLines = new ArrayList<>();
             for (int i = 0; i < model.getRowCount(); i++) {
                 Object[] row = new Object[model.getColumnCount()];
@@ -149,7 +151,10 @@ public class OrderDialog extends JDialog implements ActionListener {
             List<List<Object[]>> boxes = firstFitAlgorithm(orderLines);
 
             if (boxes != null) {
-                new OrderVisualizationDialog(order, frame, true, boxes);
+                OrderVisualizationDialog orderVisualizationDialog = new OrderVisualizationDialog(orderID, frame, true, boxes);
+                if(orderVisualizationDialog.getDoneCheck()){
+
+                }
             } else {
                 System.out.println("Sorteren gefaald, artikelen hebben ongeldige maat");
             }

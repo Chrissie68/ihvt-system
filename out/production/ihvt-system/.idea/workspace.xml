@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="pdfV0.1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderVisualizationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderVisualizationDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PackingSlip.java" beforeDir="false" afterPath="$PROJECT_DIR$/PackingSlip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QtyChangeStockDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/QtyChangeStockDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stockcheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/Stockcheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderVisualizationDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderVisualizationDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/Stockcheck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlPanelDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/ControlPanelDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StockcheckDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/StockcheckDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,15 +40,15 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "PackingSlip",
+    "git-widget-placeholder": "StableBranch",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/chris/Downloads/jSerialComm-2.11.0.jar",
+    "last_opened_file_path": "C:/mysql-connector-j-8.0.33.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
@@ -95,6 +85,7 @@
       <updated>1715592204562</updated>
       <workItem from="1716361958178" duration="15098000" />
       <workItem from="1716410571789" duration="1725000" />
+      <workItem from="1716813382961" duration="1675000" />
     </task>
     <task id="LOCAL-00001" summary="bin packing v0.2">
       <option name="closed" value="true" />
@@ -118,6 +109,29 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/PackingSlip" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pdfV0.1" />
     <option name="LAST_COMMIT_MESSAGE" value="pdfV0.1" />
@@ -137,11 +151,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="8" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GOOEY.java</url>
-          <line>10</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

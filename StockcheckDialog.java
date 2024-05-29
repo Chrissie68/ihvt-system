@@ -50,8 +50,4 @@ public class StockcheckDialog extends JDialog {
         setLocationRelativeTo(frame);
         setVisible(true);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }

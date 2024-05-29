@@ -4,10 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.fazecast.jSerialComm.*;
 
-public class ControlPanel extends JDialog implements ActionListener {
+public class ControlPanelDialog extends JDialog implements ActionListener {
     private final JButton left, right, up, down;
     SerialPort Arduino;
-    public ControlPanel(JFrame frame, boolean modal, Serialport Arduino){
+    public ControlPanelDialog(JFrame frame, boolean modal /*,Serialport Arduino*/){
         super(frame, modal);
         this.Arduino = Arduino;
         setPreferredSize(new Dimension(300, 300));

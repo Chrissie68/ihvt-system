@@ -6,10 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="pdfV0.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ControlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ControlPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ihvt-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ihvt-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlPanelDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/ControlPanelDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderVisualizationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderVisualizationDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StockcheckDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/StockcheckDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanelDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanelDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/QtyChangeStockDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/StockcheckDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/StockcheckDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ihvt-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/ihvt-system.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +51,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "PackingSlip",
+    "git-widget-placeholder": "StableBranch",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/mysql-connector-j-8.0.33.jar",
     "node.js.detected.package.eslint": "true",
@@ -111,6 +119,29 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/PackingSlip" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pdfV0.1" />
