@@ -12,17 +12,17 @@ public class OrderVisualizationDialog extends JDialog implements ActionListener 
     public OrderVisualizationDialog(Object order, JFrame frame, boolean modal, List<List<Object[]>> boxes) {
         super(frame, modal);
         setTitle("Order visualizatie");
-        setLayout(new BorderLayout());
-
         JPanel boxesPanel = new JPanel();
-        boxesPanel.setLayout(new GridLayout(boxes.size(), 1));
+        boxesPanel.setLayout(new BoxLayout(boxesPanel, BoxLayout.Y_AXIS));
 
         for (List<Object[]> box : boxes) {
             int currentDoosNummer = DoosNummer;
+            DoosNummer++;
+
             JPanel boxPanel = new JPanel();
             boxPanel.setLayout(new BorderLayout());
             boxPanel.setBorder(BorderFactory.createTitledBorder("Doos " + DoosNummer));
-            DoosNummer++;
+
 
             JPanel itemsPanel = new JPanel();
             itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
@@ -30,8 +30,9 @@ public class OrderVisualizationDialog extends JDialog implements ActionListener 
             for (Object[] item : box) {
                 JLabel itemLabel = new JLabel("Name: " + item[1] + ", Item ID: " + item[2] + ", Size: " + item[3] + ", Quantity: " + item[4]);
                 itemsPanel.add(itemLabel);
-                itemsPanel.add(Box.createVerticalStrut(5));
             }
+            JScrollPane itemScrollPane = new JScrollPane(itemsPanel);
+            itemScrollPane.setPreferredSize(new Dimension(580, 150));
 
             // aanmaken printknop per doos
             JButton printKnop = new JButton("Print");
@@ -50,13 +51,16 @@ public class OrderVisualizationDialog extends JDialog implements ActionListener 
             JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             buttonPanel.add(printKnop);
 
-            boxPanel.add(itemsPanel, BorderLayout.CENTER);
+            boxPanel.add(itemScrollPane, BorderLayout.CENTER);
             boxPanel.add(buttonPanel, BorderLayout.SOUTH);
 
+            JScrollPane boxScrollPane = new JScrollPane(boxPanel);
+            boxScrollPane.setPreferredSize(new Dimension(600, 200));
             boxesPanel.add(boxPanel);
         }
+        JScrollPane mainScrollPane = new JScrollPane(boxesPanel);
+        add(mainScrollPane, BorderLayout.CENTER);
 
-        add(boxesPanel, BorderLayout.CENTER);
 
         StartenOrder = new JButton("Starten Order");
         StartenOrder.addActionListener(this);
@@ -64,7 +68,7 @@ public class OrderVisualizationDialog extends JDialog implements ActionListener 
         startOrderPanel.add(StartenOrder);
         add(startOrderPanel, BorderLayout.SOUTH);
 
-        setSize(600, 400);
+        setSize(1000, 600);
         setLocationRelativeTo(frame);
         setVisible(true);
     }

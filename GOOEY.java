@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class GOOEY extends JFrame implements ActionListener {
-    private JButton ControlPanelButton, StockCheckButton, addOrderButton;
+    private JButton ControlPanelButton, StockCheckButton, addOrderButton, RemoveOrderButton;
     private JLabel databaseNotWorking;
     private JTable orderShow;
     SerialPort Arduino;
@@ -20,7 +20,7 @@ public class GOOEY extends JFrame implements ActionListener {
 
 
     public GOOEY() {
-        if(Database.databaseCheck()){
+        if (Database.databaseCheck()) {
             //Basic stuff
             this.setTitle("Warehouserobot");
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -30,17 +30,20 @@ public class GOOEY extends JFrame implements ActionListener {
             StockCheckButton.addActionListener(this);
             addOrderButton = new JButton("Voeg order toe");
             addOrderButton.addActionListener(this);
+            RemoveOrderButton = new JButton(" Verwijder Order");
+            RemoveOrderButton.addActionListener(this);
             JButton infoButton = new JButton("?");
             infoButton.addActionListener(this);
             JPanel buttonContainer = new JPanel();
             buttonContainer.setLayout(new FlowLayout());
             buttonContainer.add(StockCheckButton);
             buttonContainer.add(addOrderButton);
+            buttonContainer.add(RemoveOrderButton);
             buttonContainer.add(infoButton);
             add(buttonContainer, BorderLayout.NORTH);
 
             //TEST VOOR TSP
-            int[][] locaties = {{0, 0}, {2, 5}, {3, 4}, {4, 2}, {2, 8} ,{0, 0}};
+            int[][] locaties = {{0, 0}, {2, 5}, {3, 4}, {4, 2}, {2, 8}, {0, 0}};
             TSPAlgorithm.addLocationsGetResults(locaties);
 
 
@@ -77,7 +80,6 @@ public class GOOEY extends JFrame implements ActionListener {
             }
 
 
-
             //Code werkt niet.
 //            Arduino = SerialPort.getCommPort("COM8");
 //            Arduino.setComPortParameters(9600, 8, 1, 0);
@@ -101,7 +103,7 @@ public class GOOEY extends JFrame implements ActionListener {
                     int row = orderShow.rowAtPoint(point);
                     if (mouseEvent.getClickCount() == 2 && row != -1) {
                         orderID = orderShow.getValueAt(row, 0);
-                        System.out.println("Double clicked on: "+ orderID);
+                        System.out.println("Double clicked on: " + orderID);
                         OrderDialog orderDialog = new OrderDialog(thisFrame, true, orderID);
                     }
                 }
@@ -112,8 +114,7 @@ public class GOOEY extends JFrame implements ActionListener {
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
-        }
-        else{
+        } else {
             this.setTitle("Warehouserobot");
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             this.setLayout(new GridLayout());
@@ -128,18 +129,32 @@ public class GOOEY extends JFrame implements ActionListener {
         if (e.getSource() == ControlPanelButton) {
             ControlPanelDialog controlPanelDialog = new ControlPanelDialog(this, true);
         }
-        if(e.getSource() == StockCheckButton){
+        if (e.getSource() == StockCheckButton) {
             StockcheckDialog stockcheckDialog = new StockcheckDialog(this, true);
         }
-        if(e.getSource() == addOrderButton){
+        if (e.getSource() == addOrderButton) {
             Database.addOrder();
-            try{
+            try {
                 DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
                 orderShow.setModel(model);
                 OrderDialog orderDialog = new OrderDialog(thisFrame, true, Objects.requireNonNull(Database.lastOrderID()));
-            }
-            catch(SQLException a){
+            } catch (SQLException a) {
                 a.printStackTrace();
+            }
+        }
+        if (e.getSource() == RemoveOrderButton) {
+            int selectedRow = orderShow.getSelectedRow();
+            if (selectedRow != -1) {
+                int orderID = (int) orderShow.getValueAt(selectedRow, 0);
+                Database.removeOrder(orderID);
+                try {
+                    DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
+                    orderShow.setModel(model);
+                } catch (SQLException a) {
+                    a.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecteer een order om te verwijderen.");
             }
         }
     }

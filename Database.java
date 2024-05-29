@@ -1,7 +1,6 @@
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
@@ -9,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Database {
     private static final String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
-    private static final String username = "HMI";
-    private static final String password = "HMItest";
+    private static final String username = "root";
+    private static final String password = "";
 
     public static void executeChangeQuery(String query) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
@@ -109,6 +108,13 @@ public class Database {
         LocalDateTime now = LocalDateTime.now();
         String query = "INSERT INTO orders(CustomerID, SalespersonPersonID, ContactPersonID, OrderDate, ExpectedDeliveryDate, IsUndersupplyBackordered, LastEditedBy, LastEditedWhen) VALUES(1, 1, 1, '" + date.format(now) + "', '" + date.format(now) + "', 1, 9, '" + dateWithHrs.format(now) + "')";
         executeChangeQuery(query);
+    }
+
+    public static void removeOrder(int orderID){
+        String deleteOrderLinesQuery = "DELETE FROM orderlines WHERE OrderID ="+ orderID;
+        String deleteOrderQuery = "DELETE FROM orders WHERE OrderID ="+ orderID;
+        executeChangeQuery(deleteOrderLinesQuery);
+        executeChangeQuery(deleteOrderQuery);
     }
     public static String lastOrderID(){
         String query = "SELECT max(OrderID) FROM orders";
