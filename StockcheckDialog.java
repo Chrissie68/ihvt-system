@@ -46,7 +46,12 @@ public class StockcheckDialog extends JDialog {
         });
         add(scrollBar);
         ProductsShow.setDefaultEditor(Object.class, null);
-        setSize(1000, 500);
+        setSize(1000,500);
+        setLocationRelativeTo(frame);
         setVisible(true);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

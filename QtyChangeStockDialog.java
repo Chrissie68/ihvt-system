@@ -24,6 +24,7 @@ public class QtyChangeStockDialog extends JDialog implements ActionListener {
         add(input);
         add(confirm);
         setSize(300,100);
+        setLocationRelativeTo(frame);
         setVisible(true);
     }
 
