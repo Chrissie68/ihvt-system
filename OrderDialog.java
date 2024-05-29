@@ -68,7 +68,8 @@ public class OrderDialog extends JDialog implements ActionListener {
                         }
                     }
                     catch(ArrayIndexOutOfBoundsException a){
-                        System.out.println("Het probleem is verholpen");
+                        System.out.println("Er is een probleem");
+                        a.printStackTrace();
                     }
                 }
             }

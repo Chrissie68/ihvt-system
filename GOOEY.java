@@ -67,7 +67,7 @@ public class GOOEY extends JFrame implements ActionListener {
             add(ControlPanelButton, BorderLayout.SOUTH);
 
             try {
-                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC");
+                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
                 orderShow = new JTable(model);
                 orderShow.getTableHeader().setReorderingAllowed(false);
                 JScrollPane scrollPane = new JScrollPane(orderShow);
@@ -133,7 +133,14 @@ public class GOOEY extends JFrame implements ActionListener {
         }
         if(e.getSource() == addOrderButton){
             Database.addOrder();
-            OrderDialog orderDialog = new OrderDialog(thisFrame, true, Objects.requireNonNull(Database.lastOrderID()));
+            try{
+                DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
+                orderShow.setModel(model);
+                OrderDialog orderDialog = new OrderDialog(thisFrame, true, Objects.requireNonNull(Database.lastOrderID()));
+            }
+            catch(SQLException a){
+                a.printStackTrace();
+            }
         }
     }
 }

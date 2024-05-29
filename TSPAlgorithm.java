@@ -83,5 +83,7 @@ public class TSPAlgorithm{
         System.out.println("Fastest Route:");
         Arrays.stream(fastestRoute).forEach(p -> System.out.println("(" + p.name + ": " + p.x + ", " + p.y + ")"));
         System.out.println("Total Distance: " + TSPAlgorithm.routeDistance(fastestRoute));
+
+        //FUTURE: Make function that sends the locations to the Arduino.
     }
 }

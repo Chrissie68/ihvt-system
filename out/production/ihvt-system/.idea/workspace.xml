@@ -5,19 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Productlocatie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TSPAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OrderDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StockcheckDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/StockcheckDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TSPAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/TSPAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/OrderDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/StockcheckDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/StockcheckDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/StockcheckDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/StockcheckDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/TSPAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/TSPAlgorithm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +44,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "StableBranch",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/bramsprokholt/Documents/HBO-ICT /KBS/Semester 2/ihvt-system"
+    "last_opened_file_path": "/Users/bramsprokholt/Documents/HBO-ICT /KBS/Semester 2/ihvt-system backup"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -95,11 +90,10 @@
           <properties class="java.sql.SQLSyntaxErrorException" package="java.sql" />
           <option name="timeStamp" value="5" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Productlocatie.java</url>
-          <line>7</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="8" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
