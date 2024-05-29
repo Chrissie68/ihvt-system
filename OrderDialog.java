@@ -36,6 +36,7 @@ public class OrderDialog extends JDialog implements ActionListener {
         try {
             DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + orderID.toString() + "'");
             ProductsShow = new JTable(model);
+            ProductsShow.getTableHeader().setReorderingAllowed(false);
             scrollPane = new JScrollPane(ProductsShow);
             scrollPane.setPreferredSize(new Dimension(1000, 200));
         } catch (SQLException e) {
@@ -90,6 +91,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                 Database.executeChangeQuery(query);
                 DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + orderID.toString() + "'");
                 ProductsShow = new JTable(model);
+                ProductsShow.getTableHeader().setReorderingAllowed(false);
                 this.remove(scrollPane);
                 revalidate();
                 this.scrollPane = new JScrollPane(ProductsShow);
@@ -106,6 +108,7 @@ public class OrderDialog extends JDialog implements ActionListener {
                 try {
                     DefaultTableModel model = Database.executeSelectQuery("SELECT OrderLineID, StockItemID, Quantity FROM orderlines WHERE OrderId = '" + orderID.toString() + "'");
                     ProductsShow = new JTable(model);
+                    ProductsShow.getTableHeader().setReorderingAllowed(false);
                     this.remove(scrollPane);
                     this.scrollPane = new JScrollPane(ProductsShow);
                     add(scrollPane);

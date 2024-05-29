@@ -125,4 +125,17 @@ public class Database {
         }
         return null;
     }
+
+    public static boolean databaseCheck(){
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            Statement statement = connection.createStatement();
+            statement.executeQuery("SELECT 1");
+            return true;
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

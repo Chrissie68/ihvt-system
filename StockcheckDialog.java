@@ -16,6 +16,7 @@ public class StockcheckDialog extends JDialog {
         try {
             selectQuery = "SELECT StockItemName, stockitems.StockItemID, QuantityOnHand FROM stockitems INNER JOIN stockitemholdings ON stockitems.StockItemID = stockitemholdings.StockItemID";
             ProductsShow = new JTable(Database.executeSelectQuery(selectQuery));
+            ProductsShow.getTableHeader().setReorderingAllowed(false);
             scrollBar = new JScrollPane(ProductsShow);
         } catch (SQLException a) {
             System.out.println("Er is iets fout gegaan in de database");
