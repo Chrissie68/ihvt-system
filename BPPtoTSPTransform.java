@@ -5,7 +5,6 @@ public class BPPtoTSPTransform {
     public static int[][] locationTransform(int[] productsIDs) {
         int[][] locationAfter = new int[productsIDs.length][2];
         try {
-            // Construct a dynamic query to fetch bin locations for given product IDs
             StringBuilder queryBuilder = new StringBuilder("SELECT StockItemID, BinLocation FROM stockitemholdings WHERE ");
             for (int i = 0; i < productsIDs.length; i++) {
                 queryBuilder.append("StockItemID = ").append(productsIDs[i]);
