@@ -18,7 +18,6 @@ public class GOOEY extends JFrame implements ActionListener {
     private Object orderID;
     private JFrame thisFrame;
 
-
     public GOOEY() {
         if (Database.databaseCheck()) {
             //Basic stuff
@@ -45,6 +44,11 @@ public class GOOEY extends JFrame implements ActionListener {
             //TEST VOOR TSP
             int[][] locaties = {{0, 0}, {2, 5}, {3, 4}, {4, 2}, {2, 8}, {0, 0}};
             TSPAlgorithm.addLocationsGetResults(locaties);
+
+            //Tests voor het toevoegen van productlocaties vanuit het BPP
+            int[] producten = {3, 24, 4, 21, 1, 5};
+            System.out.println(Arrays.deepToString(BPPtoTSPTransform.locationTransform(producten)));
+            TSPAlgorithm.addLocationsGetResults(BPPtoTSPTransform.locationTransform(producten));
 
 
             //Define layout of storage
