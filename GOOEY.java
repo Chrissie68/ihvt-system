@@ -41,12 +41,9 @@ public class GOOEY extends JFrame implements ActionListener {
             buttonContainer.add(infoButton);
             add(buttonContainer, BorderLayout.NORTH);
 
-//            //TEST VOOR TSP
-//            int[][] locaties = {{0, 0}, {2, 5}, {3, 4}, {4, 2}, {2, 8}, {0, 0}};
-//            TSPAlgorithm.addLocationsGetResults(locaties);
 
             //Tests voor het toevoegen van productlocaties vanuit het BPP
-            int[] producten = {2, 23, 4, 25, 3, 6};
+            int[] producten = {2, 23, 4, 25, 3, 6, 5, 9, 16};
             System.out.println(Arrays.deepToString(BPPtoTSPTransform.locationTransform(producten)));
             TSPAlgorithm.addLocationsGetResults(BPPtoTSPTransform.locationTransform(producten));
 

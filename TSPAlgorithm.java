@@ -25,18 +25,18 @@ public class TSPAlgorithm{
         return totalDistance;
     }
 
-    //
+    //Function to generate possible routes. It makes an arraylist, which is being used by the helper function below.
     private static List<Productlocatie[]> generatePossibleRoutes(Productlocatie[] points) {
-        List<Productlocatie[]> permutations = new ArrayList<>();
+        List<Productlocatie[]> possibleRoutes = new ArrayList<>();
 
-        possibleRouteHelp(points, 0, permutations);
-        return permutations;
+        possibleRouteHelp(points, 0, possibleRoutes);
+        return possibleRoutes;
     }
 
-    //Function to help the possibleRoutes function. It takes
+    //Function to help the possibleRoutes, it calculates the distance for each possible route and adds these to the arraylist from generatePossibleRoutes
     private static void possibleRouteHelp(Productlocatie[] points, int index, List<Productlocatie[]> possibleRoutes) {
         if (index == points.length) {
-            //Adding original input of routes to the
+            //Adding original input of routes to the possible routes
             possibleRoutes.add(points.clone());
         } else {
             for (int i = index; i < points.length; i++) {
@@ -62,7 +62,9 @@ public class TSPAlgorithm{
         Productlocatie[] fastestRoute = null;
         double minDistance = Double.MAX_VALUE;
         for (Productlocatie[] route : possibleRoutes) {
+            //For each route in possibleRoutes take the distance
             double distance = routeDistance(route);
+            //If the distance is smaller than the minDistance, make the minimal distance, the distance
             if (distance < minDistance) {
                 minDistance = distance;
                 fastestRoute = route;
