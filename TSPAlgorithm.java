@@ -36,12 +36,13 @@ public class TSPAlgorithm{
     //Function to help the possibleRoutes, it calculates the distance for each possible route and adds these to the arraylist from generatePossibleRoutes
     private static void possibleRouteHelp(Productlocatie[] points, int index, List<Productlocatie[]> possibleRoutes) {
         if (index == points.length) {
-            //Adding original input of routes to the possible routes
+            //If the function has added all the points, it will add the route to the variable.
             possibleRoutes.add(points.clone());
         } else {
             for (int i = index; i < points.length; i++) {
                 //Swapping the locations of the indexes around to make sure all locations are being compared with eachother
                 swap(points, index, i);
+                //Added 1 to the index so the function keeps recalling itself untill all possible outcomes have been added.
                 possibleRouteHelp(points, index + 1, possibleRoutes);
                 swap(points, index, i);
             }
@@ -83,7 +84,7 @@ public class TSPAlgorithm{
         }
         Productlocatie[] fastestRoute = TSPAlgorithm.findFastestRoute(locaties);
         System.out.println("De route:");
-        Arrays.stream(fastestRoute).forEach(p -> System.out.println("(" + p.name + ": " + p.x + ", " + p.y + ")"));
+        Arrays.stream(fastestRoute).forEach(p -> System.out.println("(" + p.name + ": " + p.x + ", " + p.y + ")"));S
 
         //FUTURE: Make function that sends the locations to the Arduino.
     }
