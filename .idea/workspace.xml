@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="pdfV0.1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pakbonnen/order73619-Doos1.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TSPAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/TSPAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Database.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +39,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "test",
+    "git-widget-placeholder": "StableBranch",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/mysql-connector-j-8.0.33.jar",
     "node.js.detected.package.eslint": "true",

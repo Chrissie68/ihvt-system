@@ -14,8 +14,7 @@ public class Database {
     public static void executeChangeQuery(String query) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement()) {
-            int rowsAffected = statement.executeUpdate(query);
-            System.out.println(rowsAffected + " row(s) affected.");
+            statement.executeUpdate(query);
         } catch (CommunicationsException e) {
             e.printStackTrace();
         } catch (SQLException e) {
