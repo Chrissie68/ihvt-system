@@ -58,34 +58,32 @@ public class OrderDialog extends JDialog implements ActionListener {
         container.add(ExecuteOrderLine);
         container.add(ProductenLijst);
 
-//  Zorgt voor errors!!
-
-//        ProductsShow.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent mouseEvent) {
-//                Point point = mouseEvent.getPoint();
-//                int row = ProductsShow.rowAtPoint(point);
-//                if (mouseEvent.getClickCount() == 2 && row != -1) {
-//                    rowDataOrderLineID = ProductsShow.getValueAt(row, 0);
-//                    rowDataStockItemID = ProductsShow.getValueAt(row, 1);
-//                    try {
-//                        QtyChangeStockOrderlineDialog Qtychange = new QtyChangeStockOrderlineDialog(frame, true, rowDataOrderLineID, rowDataStockItemID);
-//                        if(Qtychange.getDoneCheck()){
-//                            try {
-//                                DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order);
-//                                ProductsShow.setModel(model);
-//                            } catch (SQLException a) {
-//                                a.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                    catch(ArrayIndexOutOfBoundsException a){
-//                        System.out.println("Er is een probleem");
-//                        a.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
+        ProductsShow.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                Point point = mouseEvent.getPoint();
+                int row = ProductsShow.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && row != -1) {
+                    rowDataOrderLineID = ProductsShow.getValueAt(row, 1);
+                    rowDataStockItemID = ProductsShow.getValueAt(row, 2);
+                    try {
+                        QtyChangeStockOrderlineDialog Qtychange = new QtyChangeStockOrderlineDialog(frame, true, rowDataOrderLineID, rowDataStockItemID);
+                        if(Qtychange.getDoneCheck()){
+                            try {
+                                DefaultTableModel model = Database.executeSelectQuery(OrderQuery + order);
+                                ProductsShow.setModel(model);
+                            } catch (SQLException a) {
+                                a.printStackTrace();
+                            }
+                        }
+                    }
+                    catch(ArrayIndexOutOfBoundsException a){
+                        System.out.println("Er is een probleem");
+                        a.printStackTrace();
+                    }
+                }
+            }
+        });
 
         add(container);
         add(scrollPane);

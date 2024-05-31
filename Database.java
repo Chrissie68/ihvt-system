@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Database {
     private static final String url = "jdbc:mysql://localhost:3306/Nerdygadgets";
-    private static final String username = "root";
-    private static final String password = "";
+    private static final String username = "HMI";
+    private static final String password = "HMItest";
 
     public static void executeChangeQuery(String query) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
