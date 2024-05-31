@@ -6,7 +6,7 @@ import com.fazecast.jSerialComm.*;
 
 public class ControlPanelDialog extends JDialog implements ActionListener {
     private final JButton left, right, up, down;
-    SerialPort Arduino;
+    private SerialPort Arduino;
     public ControlPanelDialog(JFrame frame, boolean modal /*,Serialport Arduino*/){
         super(frame, modal);
         this.Arduino = Arduino;

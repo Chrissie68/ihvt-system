@@ -81,20 +81,20 @@ public class GOOEY extends JFrame implements ActionListener {
             }
 
 
-            //Code werkt niet.
-//            Arduino = SerialPort.getCommPort("COM8");
-//            Arduino.setComPortParameters(9600, 8, 1, 0);
-//
-//            if (Arduino.openPort()) {
-//                System.out.println("poort open");
-//            } else {
-//                System.out.println("kan poort niet openen");
-//                return;
-//            }
-//
-//            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
-//            ControlPanelDialog controlPanel = new ControlPanelDialog(this, true/*, Arduino*/);
-//            Arduino.closePort();
+
+            Arduino = SerialPort.getCommPort("COM8");
+            Arduino.setComPortParameters(9600, 8, 1, 0);
+
+            if (Arduino.openPort()) {
+                System.out.println("poort open");
+            } else {
+                System.out.println("kan poort niet openen");
+                return;
+            }
+
+            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
+            ControlPanelDialog controlPanel = new ControlPanelDialog(this, true/*, Arduino*/);
+            Arduino.closePort();
 
             //Double click added so information can be extracted from JTable
             orderShow.addMouseListener(new MouseAdapter() {
