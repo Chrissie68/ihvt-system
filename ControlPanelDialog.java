@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import com.fazecast.jSerialComm.*;
 
 public class ControlPanelDialog extends JDialog implements ActionListener {
-    private final JButton left, right, up, down;
+    private final JButton left, right, up, down, fork, stil;
     private SerialPort Arduino;
-    public ControlPanelDialog(JFrame frame, boolean modal /*,Serialport Arduino*/){
+    public ControlPanelDialog(JFrame frame, boolean modal ,SerialPort Arduino){
         super(frame, modal);
         this.Arduino = Arduino;
         setPreferredSize(new Dimension(300, 300));
@@ -26,7 +26,12 @@ public class ControlPanelDialog extends JDialog implements ActionListener {
         this.down = new JButton("down");
         down.addActionListener(this);
         add(down);
-
+        this.fork = new JButton("fork");
+        fork.addActionListener(this);
+        add(fork);
+        this.stil = new JButton("stil");
+        stil.addActionListener(this);
+        add(stil);
 
         pack();
         setLocationRelativeTo(frame);
@@ -46,6 +51,10 @@ public class ControlPanelDialog extends JDialog implements ActionListener {
             message = "up";
         } else if (e.getSource() == down) {
             message = "down";
+        } else if (e.getSource() == fork){
+            message = "fork";
+        } else if (e.getSource() == stil){
+            message = "stil";
         }
         byte[] messageBytes = message.getBytes();
         Arduino.writeBytes(messageBytes, messageBytes.length);

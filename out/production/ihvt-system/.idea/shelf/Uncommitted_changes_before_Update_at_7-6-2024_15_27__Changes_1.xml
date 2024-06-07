@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1" date="1717766972721" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 7-6-2024 15:27 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ihvt-system/GOOEY$1.class" />
+    <option name="AFTER_PATH" value="out/production/ihvt-system/GOOEY$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/GOOEY$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ihvt-system/GOOEY.class" />
+    <option name="AFTER_PATH" value="out/production/ihvt-system/GOOEY.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/GOOEY.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ihvt-system/OrderDialog.class" />
+    <option name="AFTER_PATH" value="out/production/ihvt-system/OrderDialog.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/OrderDialog.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ihvt-system/ControlPanelDialog.class" />
+    <option name="AFTER_PATH" value="out/production/ihvt-system/ControlPanelDialog.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/ControlPanelDialog.class" />
+  </binary>
+</changelist>

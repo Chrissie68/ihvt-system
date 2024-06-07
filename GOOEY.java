@@ -14,7 +14,7 @@ public class GOOEY extends JFrame implements ActionListener {
     private JButton ControlPanelButton, StockCheckButton, addOrderButton, RemoveOrderButton;
     private JLabel databaseNotWorking;
     private JTable orderShow;
-    SerialPort Arduino;
+    private SerialPort Arduino;
     private Object orderID;
     private JFrame thisFrame;
 
@@ -82,20 +82,6 @@ public class GOOEY extends JFrame implements ActionListener {
 
 
 
-            Arduino = SerialPort.getCommPort("COM8");
-            Arduino.setComPortParameters(9600, 8, 1, 0);
-
-            if (Arduino.openPort()) {
-                System.out.println("poort open");
-            } else {
-                System.out.println("kan poort niet openen");
-                return;
-            }
-
-            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
-            ControlPanelDialog controlPanel = new ControlPanelDialog(this, true/*, Arduino*/);
-            Arduino.closePort();
-
             //Double click added so information can be extracted from JTable
             orderShow.addMouseListener(new MouseAdapter() {
                 @Override
@@ -128,7 +114,19 @@ public class GOOEY extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ControlPanelButton) {
-            ControlPanelDialog controlPanelDialog = new ControlPanelDialog(this, true);
+            Arduino = SerialPort.getCommPort("COM7");
+            Arduino.setComPortParameters(9600, 8, 1, 0);
+
+            if (Arduino.openPort()) {
+                System.out.println("poort open");
+            } else {
+                System.out.println("kan poort niet openen");
+                return;
+            }
+
+            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
+            ControlPanelDialog controlPanel = new ControlPanelDialog(this, true, Arduino);
+            Arduino.closePort();
         }
         if (e.getSource() == StockCheckButton) {
             StockcheckDialog stockcheckDialog = new StockcheckDialog(this, true);
