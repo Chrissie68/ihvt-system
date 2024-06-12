@@ -9,49 +9,70 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class GOOEY extends JFrame implements ActionListener {
-    private JButton ControlPanelButton, StockCheckButton, addOrderButton, RemoveOrderButton;
+    private boolean serialReading = true;
+    private JButton ControlPanelButton, StockCheckButton, addOrderButton, RemoveOrderButton, serialReadingButton;
     private JLabel databaseNotWorking;
     private JTable orderShow;
-    private SerialPort Arduino;
+    //private SerialPort arduino;
     private Object orderID;
+    ArduinoConnection arduino;
     private JFrame thisFrame;
 
     public GOOEY() {
         if (Database.databaseCheck()) {
-            //Basic stuff
+//            arduino = SerialPort.getCommPort("COM7");
+//            arduino.setComPortParameters(9600, 8, 1, 0);
+//
+//            if (arduino.openPort()) {
+//                System.out.println("Port open");
+//            } else {
+//                System.out.println("Cannot open port");
+//                return;
+//            }
+//
+//            try {
+//                Thread.sleep(2000);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
+            try {
+                arduino = new ArduinoConnection("com7", 9600);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            // Basic GUI setup
             this.setTitle("Warehouserobot");
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             this.setLayout(new BorderLayout());
             thisFrame = this;
+
             StockCheckButton = new JButton("Bekijk voorraad");
             StockCheckButton.addActionListener(this);
             addOrderButton = new JButton("Voeg order toe");
             addOrderButton.addActionListener(this);
-            RemoveOrderButton = new JButton(" Verwijder Order");
+            RemoveOrderButton = new JButton("Verwijder Order");
             RemoveOrderButton.addActionListener(this);
             JButton infoButton = new JButton("?");
             infoButton.addActionListener(this);
+            serialReadingButton = new JButton("KLIK DIT OM TE STOPPEN");
+            serialReadingButton.addActionListener(this);
+
             JPanel buttonContainer = new JPanel();
             buttonContainer.setLayout(new FlowLayout());
             buttonContainer.add(StockCheckButton);
             buttonContainer.add(addOrderButton);
             buttonContainer.add(RemoveOrderButton);
+            buttonContainer.add(serialReadingButton);
             buttonContainer.add(infoButton);
             add(buttonContainer, BorderLayout.NORTH);
 
-
-            //Tests voor het toevoegen van productlocaties vanuit het BPP
-            int[] producten = {2, 23, 4, 25, 3, 6, 5, 9, 16};
-            System.out.println(Arrays.deepToString(BPPtoTSPTransform.locationTransform(producten)));
-            TSPAlgorithm.addLocationsGetResults(BPPtoTSPTransform.locationTransform(producten));
-
-
-            //Define layout of storage
+            // Storage layout
             JPanel rasterPanel = new JPanel(new GridLayout(5, 5));
-
-            //Filling the layout with boxes
             char rowLabel = 'A';
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
@@ -62,14 +83,14 @@ public class GOOEY extends JFrame implements ActionListener {
                 }
                 rowLabel++;
             }
-            //Adding the storage layout to the GUI
             add(rasterPanel, BorderLayout.CENTER);
 
-            //Adding button for manual operation
+            // Manual control button
             ControlPanelButton = new JButton("Handmatig bedienen");
             ControlPanelButton.addActionListener(this);
             add(ControlPanelButton, BorderLayout.SOUTH);
 
+            // Order table setup
             try {
                 DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
                 orderShow = new JTable(model);
@@ -80,9 +101,6 @@ public class GOOEY extends JFrame implements ActionListener {
                 e.printStackTrace();
             }
 
-
-
-            //Double click added so information can be extracted from JTable
             orderShow.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
@@ -101,6 +119,7 @@ public class GOOEY extends JFrame implements ActionListener {
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
+
         } else {
             this.setTitle("Warehouserobot");
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -112,31 +131,27 @@ public class GOOEY extends JFrame implements ActionListener {
         }
     }
 
+    public void locatiebepaling(int x, int y){
+
+    }
+
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ControlPanelButton) {
-            Arduino = SerialPort.getCommPort("COM7");
-            Arduino.setComPortParameters(9600, 8, 1, 0);
-
-            if (Arduino.openPort()) {
-                System.out.println("poort open");
-            } else {
-                System.out.println("kan poort niet openen");
-                return;
-            }
-
-            try { Thread.sleep(2000); } catch (Exception edrie) { edrie.printStackTrace(); }
-            ControlPanelDialog controlPanel = new ControlPanelDialog(this, true, Arduino);
-            Arduino.closePort();
+            new ControlPanelDialog(this, true, arduino);
+        }
+        if (e.getSource() == serialReadingButton) {
+            serialReading = false;
         }
         if (e.getSource() == StockCheckButton) {
-            StockcheckDialog stockcheckDialog = new StockcheckDialog(this, true);
+           new StockcheckDialog(this, true);
         }
         if (e.getSource() == addOrderButton) {
             Database.addOrder();
             try {
                 DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
                 orderShow.setModel(model);
-                OrderDialog orderDialog = new OrderDialog(thisFrame, true, Objects.requireNonNull(Database.lastOrderID()));
+                new OrderDialog(thisFrame, true, Objects.requireNonNull(Database.lastOrderID()));
             } catch (SQLException a) {
                 a.printStackTrace();
             }
@@ -158,5 +173,3 @@ public class GOOEY extends JFrame implements ActionListener {
         }
     }
 }
-
-

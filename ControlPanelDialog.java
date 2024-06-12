@@ -2,12 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import com.fazecast.jSerialComm.*;
 
 public class ControlPanelDialog extends JDialog implements ActionListener {
     private final JButton left, right, up, down, fork, stil;
-    private SerialPort Arduino;
-    public ControlPanelDialog(JFrame frame, boolean modal ,SerialPort Arduino){
+    private ArduinoConnection Arduino;
+    public ControlPanelDialog(JFrame frame, boolean modal ,ArduinoConnection Arduino){
         super(frame, modal);
         this.Arduino = Arduino;
         setPreferredSize(new Dimension(300, 300));
@@ -40,6 +42,7 @@ public class ControlPanelDialog extends JDialog implements ActionListener {
         setVisible(true);
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String message = "";
@@ -56,8 +59,11 @@ public class ControlPanelDialog extends JDialog implements ActionListener {
         } else if (e.getSource() == stil){
             message = "stil";
         }
-        byte[] messageBytes = message.getBytes();
-        Arduino.writeBytes(messageBytes, messageBytes.length);
+        try {
+            Arduino.sendMessage(message);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
 

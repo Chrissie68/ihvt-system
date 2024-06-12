@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="pdfV0.1">
+      <change afterPath="$PROJECT_DIR$/ArduinoConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ControlPanelDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/ControlPanelDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ihvt-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ihvt-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanelDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanelDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +96,11 @@
       <workItem from="1716410571789" duration="1725000" />
       <workItem from="1716813382961" duration="1675000" />
       <workItem from="1717767227196" duration="2810000" />
+      <workItem from="1717771247749" duration="665000" />
+      <workItem from="1717772091228" duration="7000" />
+      <workItem from="1717836549978" duration="283000" />
+      <workItem from="1718025437631" duration="20745000" />
+      <workItem from="1718183883834" duration="6638000" />
     </task>
     <task id="LOCAL-00001" summary="bin packing v0.2">
       <option name="closed" value="true" />
