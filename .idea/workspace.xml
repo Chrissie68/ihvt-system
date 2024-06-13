@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="Connectie Arduino java en locatiebepaling">
-      <change afterPath="$PROJECT_DIR$/CustomDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArduinoConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/ArduinoConnectie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ControlPanelDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/ControlPanelDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
-    </list>
+    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="locatiebepaling met stip" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718198245603</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="locatiebepaling met stip">
+      <option name="closed" value="true" />
+      <created>1718273605068</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718273605068</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +157,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pdfV0.1" />
     <MESSAGE value="Connectie Arduino java en locatiebepaling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Connectie Arduino java en locatiebepaling" />
+    <MESSAGE value="locatiebepaling met stip" />
+    <option name="LAST_COMMIT_MESSAGE" value="locatiebepaling met stip" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
