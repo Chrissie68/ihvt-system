@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="locatiebepaling met stip" />
+    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="locatiebepaling met stip">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,7 +93,7 @@
       <workItem from="1718025437631" duration="20745000" />
       <workItem from="1718183883834" duration="6638000" />
       <workItem from="1718196977273" duration="4250000" />
-      <workItem from="1718211283683" duration="5107000" />
+      <workItem from="1718211283683" duration="5321000" />
     </task>
     <task id="LOCAL-00001" summary="bin packing v0.2">
       <option name="closed" value="true" />
