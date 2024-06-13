@@ -5,13 +5,15 @@ import com.fazecast.jSerialComm.SerialPortEvent;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class ArduinoConnection {
+public class ArduinoConnectie {
+    private GOOEY gooey;
     int xCoordinaten, yCoordinaten;
     private SerialPort serialPort;
     private StringBuilder messageBuffer = new StringBuilder();
 
-    public ArduinoConnection(String portName, int baudRate) throws InterruptedException {
-        serialPort = SerialPort.getCommPort(portName);
+    public ArduinoConnectie(String portNaam, int baudRate, GOOEY gooey) throws InterruptedException {
+        this.gooey = gooey;
+        serialPort = SerialPort.getCommPort(portNaam);
         serialPort.setComPortParameters(baudRate, 8, 1, 0);
         serialPort.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0);
 
@@ -77,14 +79,19 @@ public class ArduinoConnection {
             processCommand(completeCommand);
         }
     }
-    private void processCommand(String data){
+    public void processCommand(String data) {
         System.out.println("Received: " + data);
         if (data.startsWith("COORD")) {
             String[] parts = data.split(",");
             if (parts.length == 3) {
                 try {
-                    xCoordinaten = Integer.parseInt(parts[1]);
-                    yCoordinaten = Integer.parseInt(parts[2]);
+                    int xCoordinaten = Integer.parseInt(parts[1]);
+                    int yCoordinaten = Integer.parseInt(parts[2]);
+
+                    xCoordinaten = (int) Math.round(xCoordinaten / 5.488);
+                    yCoordinaten = (int) Math.round(yCoordinaten / 4.318);
+
+                    gooey.addRedDotLabel(xCoordinaten, yCoordinaten);
                     System.out.println("Coordinates received: x=" + xCoordinaten + ", y=" + yCoordinaten);
                 } catch (NumberFormatException e) {
                     System.out.println("Error parsing coordinates: " + e.getMessage());
@@ -96,5 +103,6 @@ public class ArduinoConnection {
             System.out.println("Unexpected data format: " + data);
         }
     }
+
 
 }

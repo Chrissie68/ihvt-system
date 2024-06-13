@@ -8,8 +8,8 @@ import com.fazecast.jSerialComm.*;
 
 public class ControlPanelDialog extends JDialog implements ActionListener {
     private final JButton left, right, up, down, fork, stil;
-    private ArduinoConnection Arduino;
-    public ControlPanelDialog(JFrame frame, boolean modal ,ArduinoConnection Arduino){
+    private ArduinoConnectie Arduino;
+    public ControlPanelDialog(JFrame frame, boolean modal ,ArduinoConnectie Arduino){
         super(frame, modal);
         this.Arduino = Arduino;
         setPreferredSize(new Dimension(300, 300));

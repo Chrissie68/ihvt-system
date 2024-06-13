@@ -1,56 +1,39 @@
+import com.fazecast.jSerialComm.SerialPort;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
-import javax.swing.table.DefaultTableModel;
-import com.fazecast.jSerialComm.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class GOOEY extends JFrame implements ActionListener {
-    private boolean serialReading = true;
-    private JButton ControlPanelButton, StockCheckButton, addOrderButton, RemoveOrderButton, serialReadingButton;
+    private int xCoordinaat = 0, yCoordinaat = 0;
+    private JButton ControlPanelButton, StockCheckButton, addOrderButton, RemoveOrderButton;
     private JLabel databaseNotWorking;
     private JTable orderShow;
-    //private SerialPort arduino;
+    private ArduinoConnectie Arduino;
     private Object orderID;
-    ArduinoConnection arduino;
     private JFrame thisFrame;
+    private JLabel redDotLabel;
+    private JPanel rasterPanel;
 
     public GOOEY() {
         if (Database.databaseCheck()) {
-//            arduino = SerialPort.getCommPort("COM7");
-//            arduino.setComPortParameters(9600, 8, 1, 0);
-//
-//            if (arduino.openPort()) {
-//                System.out.println("Port open");
-//            } else {
-//                System.out.println("Cannot open port");
-//                return;
-//            }
-//
-//            try {
-//                Thread.sleep(2000);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
+            // Basic stuff
             try {
-                arduino = new ArduinoConnection("com7", 9600);
+                Arduino = new ArduinoConnectie("com7", 9600, this);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
-            // Basic GUI setup
             this.setTitle("Warehouserobot");
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             this.setLayout(new BorderLayout());
             thisFrame = this;
-
             StockCheckButton = new JButton("Bekijk voorraad");
             StockCheckButton.addActionListener(this);
             addOrderButton = new JButton("Voeg order toe");
@@ -59,38 +42,31 @@ public class GOOEY extends JFrame implements ActionListener {
             RemoveOrderButton.addActionListener(this);
             JButton infoButton = new JButton("?");
             infoButton.addActionListener(this);
-            serialReadingButton = new JButton("KLIK DIT OM TE STOPPEN");
-            serialReadingButton.addActionListener(this);
-
             JPanel buttonContainer = new JPanel();
             buttonContainer.setLayout(new FlowLayout());
             buttonContainer.add(StockCheckButton);
             buttonContainer.add(addOrderButton);
             buttonContainer.add(RemoveOrderButton);
-            buttonContainer.add(serialReadingButton);
             buttonContainer.add(infoButton);
             add(buttonContainer, BorderLayout.NORTH);
 
-            // Storage layout
-            JPanel rasterPanel = new JPanel(new GridLayout(5, 5));
-            char rowLabel = 'A';
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 5; j++) {
-                    JLabel label = new JLabel(String.format("%c%d", rowLabel, j + 1), SwingConstants.CENTER);
-                    label.setPreferredSize(new Dimension(100, 100));
-                    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    rasterPanel.add(label);
-                }
-                rowLabel++;
-            }
+            // Tests voor het toevoegen van productlocaties vanuit het BPP
+            int[] producten = {2, 23, 4, 25, 3, 6};
+            System.out.println(Arrays.deepToString(BPPtoTSPTransform.locationTransform(producten)));
+            TSPAlgorithm.addLocationsGetResults(BPPtoTSPTransform.locationTransform(producten));
+
+            // Define layout of storage
+            rasterPanel = new JPanel(null); // Set layout to null for manual positioning
+            addRasterLabels();
+
+            // Adding the storage layout to the GUI
             add(rasterPanel, BorderLayout.CENTER);
 
-            // Manual control button
+            // Adding button for manual operation
             ControlPanelButton = new JButton("Handmatig bedienen");
             ControlPanelButton.addActionListener(this);
             add(ControlPanelButton, BorderLayout.SOUTH);
 
-            // Order table setup
             try {
                 DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
                 orderShow = new JTable(model);
@@ -101,6 +77,7 @@ public class GOOEY extends JFrame implements ActionListener {
                 e.printStackTrace();
             }
 
+            // Double click added so information can be extracted from JTable
             orderShow.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
@@ -115,11 +92,13 @@ public class GOOEY extends JFrame implements ActionListener {
             });
 
             orderShow.setDefaultEditor(Object.class, null);
-            this.setMinimumSize(new Dimension(800, 600));
+            this.setMinimumSize(new Dimension(1000, 600));
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
 
+            // Add red dot label at initial position (0, 0)
+            addRedDotLabel(xCoordinaat, yCoordinaat);
         } else {
             this.setTitle("Warehouserobot");
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -131,27 +110,64 @@ public class GOOEY extends JFrame implements ActionListener {
         }
     }
 
-    public void locatiebepaling(int x, int y){
+    private void addRasterLabels() {
+        for (char rowLabel = 'A'; rowLabel <= 'E'; rowLabel++) {
+            for (int j = 1; j <= 5; j++) {
+                JLabel label = new JLabel(String.format("%c%d", rowLabel, j), SwingConstants.CENTER);
+                label.setPreferredSize(new Dimension(100, 100));
+                label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                int x = (j - 1) * 100; // Calculate x-coordinate
+                int y = (rowLabel - 'A') * 100; // Calculate y-coordinate
+                label.setBounds(x, y, 100, 100); // Set position
 
+                // Set cursor to hand pointer when hovering over the label
+                label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                // Add mouse listener to each label for mouse click event only
+                label.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        String labelText = label.getText();
+                        CustomDialog customDialog = new CustomDialog(thisFrame, "Beweeg naar", labelText);
+                        customDialog.setVisible(true);
+                    }
+                });
+
+                rasterPanel.add(label);
+            }
+        }
     }
 
+    public void addRedDotLabel(int x, int y) {
+        if (redDotLabel == null) {
+            // Create a red dot label if it doesn't exist
+            redDotLabel = new JLabel("\u2022", SwingConstants.CENTER); // Red dot character
+            redDotLabel.setForeground(Color.RED);
+            redDotLabel.setFont(new Font("Arial", Font.BOLD, 30)); // Adjust font size to make the dot bigger
+            rasterPanel.add(redDotLabel);
+        }
+        // Set position of red dot label
+        redDotLabel.setBounds(x, y, 100, 100); // Set position based on coordinates
 
+        // Repaint the panel
+        rasterPanel.revalidate();
+        rasterPanel.repaint();
+    }
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ControlPanelButton) {
-            new ControlPanelDialog(this, true, arduino);
-        }
-        if (e.getSource() == serialReadingButton) {
-            serialReading = false;
+            ControlPanelDialog controlPanelDialog = new ControlPanelDialog(this, true, Arduino);
         }
         if (e.getSource() == StockCheckButton) {
-           new StockcheckDialog(this, true);
+            StockcheckDialog stockcheckDialog = new StockcheckDialog(this, true);
         }
         if (e.getSource() == addOrderButton) {
             Database.addOrder();
             try {
                 DefaultTableModel model = Database.executeSelectQuery("SELECT OrderID, CustomerID FROM orders ORDER BY OrderID DESC LIMIT 5");
                 orderShow.setModel(model);
-                new OrderDialog(thisFrame, true, Objects.requireNonNull(Database.lastOrderID()));
+                OrderDialog orderDialog = new OrderDialog(thisFrame, true, Objects.requireNonNull(Database.lastOrderID()));
             } catch (SQLException a) {
                 a.printStackTrace();
             }
