@@ -147,7 +147,7 @@ public class GOOEY extends JFrame implements ActionListener {
             rasterPanel.add(redDotLabel);
         }
         // Set position of red dot label
-        redDotLabel.setBounds(x, y, 100, 100); // Set position based on coordinates
+        redDotLabel.setBounds(x, y, 75, 925); // Set position based on coordinates
 
         // Repaint the panel
         rasterPanel.revalidate();

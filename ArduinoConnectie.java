@@ -88,8 +88,8 @@ public class ArduinoConnectie {
                     int xCoordinaten = Integer.parseInt(parts[1]);
                     int yCoordinaten = Integer.parseInt(parts[2]);
 
-                    xCoordinaten = (int) Math.round(xCoordinaten / 5.488);
-                    yCoordinaten = (int) Math.round(yCoordinaten / 4.318);
+                    xCoordinaten = (int) Math.round(xCoordinaten / 7.222222222222);
+                    yCoordinaten = (int) Math.round(yCoordinaten / 5.5);
 
                     gooey.addRedDotLabel(xCoordinaten, yCoordinaten);
                     System.out.println("Coordinates received: x=" + xCoordinaten + ", y=" + yCoordinaten);
