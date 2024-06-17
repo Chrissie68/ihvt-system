@@ -4,10 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="locatiebepaling met stip">
+    <list default="true" id="c3972e4f-6574-4b6a-aa06-22b620fe2d1f" name="Changes" comment="locatiebepaling met stip verbeterd">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/ControlPanelDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/GOOEY$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/GOOEY.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/OrderDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7-6-2024_15_27__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ArduinoConnectie.java" beforeDir="false" afterPath="$PROJECT_DIR$/ArduinoConnectie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/CustomDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GOOEY.java" beforeDir="false" afterPath="$PROJECT_DIR$/GOOEY.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ArduinoConnection$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ArduinoConnection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanelDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/ControlPanelDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ihvt-system/GOOEY.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +109,8 @@
       <workItem from="1718183883834" duration="6638000" />
       <workItem from="1718196977273" duration="4250000" />
       <workItem from="1718211283683" duration="5321000" />
-      <workItem from="1718354208617" duration="3153000" />
+      <workItem from="1718354208617" duration="3434000" />
+      <workItem from="1718625440549" duration="1786000" />
     </task>
     <task id="LOCAL-00001" summary="bin packing v0.2">
       <option name="closed" value="true" />
@@ -130,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718273605068</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="locatiebepaling met stip verbeterd">
+      <option name="closed" value="true" />
+      <created>1718357648922</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718357648922</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +185,8 @@
     <MESSAGE value="pdfV0.1" />
     <MESSAGE value="Connectie Arduino java en locatiebepaling" />
     <MESSAGE value="locatiebepaling met stip" />
-    <option name="LAST_COMMIT_MESSAGE" value="locatiebepaling met stip" />
+    <MESSAGE value="locatiebepaling met stip verbeterd" />
+    <option name="LAST_COMMIT_MESSAGE" value="locatiebepaling met stip verbeterd" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

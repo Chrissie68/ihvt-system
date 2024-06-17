@@ -128,8 +128,7 @@ public class GOOEY extends JFrame implements ActionListener {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         String labelText = label.getText();
-                        CustomDialog customDialog = new CustomDialog(thisFrame, "Beweeg naar", labelText);
-                        customDialog.setVisible(true);
+                        CustomDialog customDialog = new CustomDialog(thisFrame, "" + labelText, labelText, Arduino);
                     }
                 });
 
