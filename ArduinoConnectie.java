@@ -6,16 +6,17 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class ArduinoConnectie {
+    private String status = "bewegen";
     private GOOEY gooey;
     int xCoordinaten, yCoordinaten;
-    private SerialPort serialPort;
+    private SerialPort Arduino;
     private StringBuilder messageBuffer = new StringBuilder();
 
     public ArduinoConnectie(String portNaam, int baudRate, GOOEY gooey) throws InterruptedException {
         this.gooey = gooey;
-        serialPort = SerialPort.getCommPort(portNaam);
-        serialPort.setComPortParameters(baudRate, 8, 1, 0);
-        serialPort.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0);
+        Arduino = SerialPort.getCommPort(portNaam);
+        Arduino.setComPortParameters(baudRate, 8, 1, 0);
+        Arduino.setComPortTimeouts(Arduino.TIMEOUT_WRITE_BLOCKING, 0, 0);
 
         if (!openPort()) {
             return;
@@ -25,7 +26,7 @@ public class ArduinoConnectie {
     }
 
     public boolean openPort() {
-        if (serialPort.openPort()) {
+        if (Arduino.openPort()) {
             System.out.println("connectie met arduino gelukt");
             return true;
         } else {
@@ -34,53 +35,47 @@ public class ArduinoConnectie {
         }
     }
 
-    public boolean closePort() {
-        if (serialPort.closePort()) {
-            System.out.println("Port is closed :)");
-            return true;
-        } else {
-            System.out.println("Failed to close port :(");
-            return false;
-        }
-    }
-
-    public void sendMessage(String message) throws IOException {
-        serialPort.getOutputStream().write(message.getBytes());
-        serialPort.getOutputStream().flush();
-        System.out.println("Sent message: " + message);
+    public void stuurBericht(String message) throws IOException {
+        Arduino.getOutputStream().write(message.getBytes());
+        Arduino.getOutputStream().flush();
     }
 
 
     public void addSerialPortEventListener() {
-        serialPort.addDataListener(new SerialPortDataListener() {
-            @Override
-            public int getListeningEvents() {
-                return SerialPort.LISTENING_EVENT_DATA_AVAILABLE;
-            }
+        Arduino.addDataListener(new SerialPortDataListener() {
 
-            @Override
             public void serialEvent(SerialPortEvent event) {
                 if (event.getEventType() == SerialPort.LISTENING_EVENT_DATA_AVAILABLE) {
-                    byte[] newData = new byte[serialPort.bytesAvailable()];
-                    serialPort.readBytes(newData, newData.length);
+                    byte[] newData = new byte[Arduino.bytesAvailable()];
+                    Arduino.readBytes(newData, newData.length);
                     String receivedMessage = new String(newData);
-                    processIncomingData(receivedMessage);
+                    processData(receivedMessage);
                 }
+            }
+            public int getListeningEvents() {
+                return SerialPort.LISTENING_EVENT_DATA_AVAILABLE;
             }
         });
     }
 
-    private void processIncomingData(String data) {
+    private void processData(String data) {
         messageBuffer.append(data);
         int index;
         while ((index = messageBuffer.indexOf("\n")) != -1) { // Assuming commands end with newline character
-            String completeCommand = messageBuffer.substring(0, index).trim();
+            String Commando = messageBuffer.substring(0, index).trim();
             messageBuffer.delete(0, index + 1);
-            processCommand(completeCommand);
+            processcommando(Commando);
         }
     }
-    public void processCommand(String data) {
+    public void processcommando(String data) {
+
         System.out.println("Received: " + data);
+        if(data.equals("fork")){
+            System.out.println("niggers");
+            status = "fork";
+        } else if (data.equals("bewegen")) {
+            status = "bewegen";
+        }
         if (data.startsWith("COORD")) {
             String[] parts = data.split(",");
             if (parts.length == 3) {
@@ -91,7 +86,7 @@ public class ArduinoConnectie {
                     xCoordinaten = (int) Math.round(xCoordinaten / 7.222222222222);
                     yCoordinaten = (int) Math.round(yCoordinaten / -5.5);
 
-                    gooey.addRedDotLabel(xCoordinaten, yCoordinaten);
+                    gooey.addRedDotLabel(xCoordinaten, yCoordinaten, status);
                     System.out.println("Coordinates received: x=" + xCoordinaten + ", y=" + yCoordinaten);
                 } catch (NumberFormatException e) {
                     System.out.println("Error parsing coordinates: " + e.getMessage());

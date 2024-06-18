@@ -98,7 +98,7 @@ public class GOOEY extends JFrame implements ActionListener {
             this.setVisible(true);
 
             // Add red dot label at initial position (0, 0)
-            addRedDotLabel(xCoordinaat, yCoordinaat);
+            addRedDotLabel(xCoordinaat, yCoordinaat, "bewegen");
         } else {
             this.setTitle("Warehouserobot");
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -137,7 +137,7 @@ public class GOOEY extends JFrame implements ActionListener {
         }
     }
 
-    public void addRedDotLabel(int x, int y) {
+    public void addRedDotLabel(int x, int y, String status) {
         if (redDotLabel == null) {
             // Create a red dot label if it doesn't exist
             redDotLabel = new JLabel("\u2022", SwingConstants.CENTER); // Red dot character
@@ -146,9 +146,15 @@ public class GOOEY extends JFrame implements ActionListener {
             rasterPanel.add(redDotLabel);
         }
         // Set position of red dot label
+        Color kleur;
         redDotLabel.setBounds(x, y, 75, 925); // Set position based on coordinates
-
+        if(status == "fork"){
+            kleur = Color.BLUE;
+        }else{
+            kleur = Color.RED;
+        }
         // Repaint the panel
+        redDotLabel.setForeground(kleur);
         rasterPanel.revalidate();
         rasterPanel.repaint();
     }

@@ -7,7 +7,7 @@ import java.io.IOException;
 import com.fazecast.jSerialComm.*;
 
 public class ControlPanelDialog extends JDialog implements ActionListener {
-    private final JButton left, right, up, down, fork, stil;
+    private final JButton left, right, up, down, fork, stil, kalibreer;
     private ArduinoConnectie Arduino;
     public ControlPanelDialog(JFrame frame, boolean modal ,ArduinoConnectie Arduino){
         super(frame, modal);
@@ -34,6 +34,9 @@ public class ControlPanelDialog extends JDialog implements ActionListener {
         this.stil = new JButton("stil");
         stil.addActionListener(this);
         add(stil);
+        this.kalibreer = new JButton("kalibreer");
+        kalibreer.addActionListener(this);
+        add(kalibreer);
 
         pack();
         setLocationRelativeTo(frame);
@@ -58,9 +61,11 @@ public class ControlPanelDialog extends JDialog implements ActionListener {
             message = "fork";
         } else if (e.getSource() == stil){
             message = "stil";
+        }else if (e.getSource() == kalibreer){
+            message = "kalibreer";
         }
         try {
-            Arduino.sendMessage(message);
+            Arduino.stuurBericht(message);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

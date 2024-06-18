@@ -85,7 +85,7 @@ public class CustomDialog extends JDialog implements ActionListener {
             if (coordinates != null) {
 
                 try {
-                    Arduino.sendMessage("coordinaten," + coordinates);
+                    Arduino.stuurBericht("coordinaten," + coordinates);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
